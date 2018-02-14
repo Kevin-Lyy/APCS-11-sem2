@@ -113,6 +113,7 @@ public class QueenBoard{
 	for(int col = 0; col < size; col++){
 	    if(addQueen(row,col)){
 		count += helpCount(row +1);
+		removeQueen(row,col);
 	    }
 	}
 	return count;
