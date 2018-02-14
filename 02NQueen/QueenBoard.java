@@ -75,15 +75,25 @@ public class QueenBoard{
 	for (int[] x:board){
 	    for (int y : x){
 		if(y != 0){
-		    throw new IllegalStatementException();
+		    throw new IllegalStateException();
 		}
 	    }
 	}
 	return helpSolve(0);
     }
-    public boolean helpSolve(int col){
-	if
-
+    public boolean helpSolve(int row){
+	if(row == size){
+	    return true;
+	}
+	for(int col = 0; col < size; col++){
+	    if(addQueen(row,col) && helpSolve(row + 1)){
+		return true;
+	    }
+	    removeQueen(row,col);
+	}
+	return false;
+    }
+    
     public int countSolutions(){}
 
 }
