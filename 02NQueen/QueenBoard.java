@@ -94,6 +94,28 @@ public class QueenBoard{
 	return false;
     }
     
-    public int countSolutions(){}
+    public int countSolutions(){
+	for (int[] x:board){
+	    for (int y : x){
+		if(y != 0){
+		    throw new IllegalStateException();
+		}
+	    }
+	}
+	return helpCount(0);	
+    }
+
+    public int helpCount(int row){
+	int count = 0;
+	if(row == size){
+	    return 1;
+	}
+	for(int col = 0; col < size; col++){
+	    if(addQueen(row,col)){
+		count += helpCount(row +1);
+	    }
+	}
+	return count;
+    }
 
 }
