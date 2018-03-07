@@ -5,8 +5,25 @@ public class Maze{
 
     private char[][]maze;
     private boolean animate; //false
+    public int[][] movement = {{1,0},{-1,0},{0,1},{0,-1}};
 
-    public Maze(String filename) throws FileNotFoundException{
+    public String toString(){
+	str = "";
+	for(int r = 0; r <maze.length;r++){
+	    for(int c = 0; c < maze[0].length; c++){
+		if(maze[r][c] == '@') str += " @ ";
+		else if (maze[r][c] == "#")str += " # ";
+		else if (maze[r][c] == ".")str += " . ";
+		if (c == maze[0].length -1){
+		    str += "\n";
+		}
+	    }
+	}
+	return str;
+
+    }
+
+    public Maze(String filename) throws FileNotFoundException,IllegalStateException{
 
     }
 
