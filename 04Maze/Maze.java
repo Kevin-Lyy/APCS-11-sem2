@@ -24,7 +24,31 @@ public class Maze{
     }
 
     public Maze(String filename) throws FileNotFoundException,IllegalStateException{
+	Scanner filereader = new Scanner(new File(filename));
+	int rows = 0;
+	int cols = 0;
+	String fileread = "";
+	while(filereader.hasNextLine()){
+	    fileread = filereader.nextLine();
+	    rows++;
+	}
+	cols = fileread.length();
+	maze = new char[rows][cols];
 
+	Scanner checkfile = new Scanner(new File(filename));
+	int startOrStop = 0;
+	int r = 0;
+	while(checkfile.hasNextLine()){
+	    String checkFileRead = checkfile.nextLine();
+	    for(int c = 0;c < checkFileRead.length(); c++){
+		if (maze[r][c] == 'S' || maze[r][c] == 'E')startOrStop++
+	    }
+	    r++;
+	}
+
+	if (startOrStop != 1) throw new IllegalStateException("false maze" + startOrStop);	
+	
+		
     }
 
     private void wait(int millis){
