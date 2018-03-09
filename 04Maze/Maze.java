@@ -1,5 +1,5 @@
 import java.util.*;
-import java.io,*;
+import java.io.*;
 
 public class Maze{
 
@@ -8,12 +8,12 @@ public class Maze{
     public int[][] movement = {{1,0},{-1,0},{0,1},{0,-1}};
 
     public String toString(){
-	str = "";
+	String str = "";
 	for(int r = 0; r <maze.length;r++){
 	    for(int c = 0; c < maze[0].length; c++){
 		if(maze[r][c] == '@') str += " @ ";
-		else if (maze[r][c] == "#")str += " # ";
-		else if (maze[r][c] == ".")str += " . ";
+		else if (maze[r][c] == '#')str += " # ";
+		else if (maze[r][c] == '.')str += " . ";
 		if (c == maze[0].length -1){
 		    str += "\n";
 		}
@@ -41,7 +41,7 @@ public class Maze{
 	while(checkfile.hasNextLine()){
 	    String checkFileRead = checkfile.nextLine();
 	    for(int c = 0;c < checkFileRead.length(); c++){
-		if (maze[r][c] == 'S' || maze[r][c] == 'E')startOrStop++
+		if (maze[r][c] == 'S' || maze[r][c] == 'E')startOrStop++;
 	    }
 	    r++;
 	}
@@ -66,12 +66,21 @@ public class Maze{
     public void clearTerminal(){
 	System.out.println("\033[2J\033[1;1H");
     }
+
+
+    
     public int solve(){
+	for(int r = 0; r < maze.length; r++){
+	for(int c = 0; c < maze[0].length; c++){
+		if(maze[r][c] =='S'){
+		    return solve(r,c,0);
+		}
+	    }
+	}
+	return -1;
 
     }
-
-    private int solve(int row, int col){
-
+    private int solve(int row, int col,int level){
 	if(animate){
 	    clearTerminal();
 	    System.out.println(this);
@@ -80,6 +89,7 @@ public class Maze{
 
 	return -1;
     }
+    
 
 
 }
