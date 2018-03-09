@@ -86,6 +86,19 @@ public class Maze{
 	    System.out.println(this);
 	    wait(20);
 	}
+	if(maze[row][col] == 'E')return level;
+	for(int[]move:movement){
+	    int coln = col + move[1];
+	    int rown = row + move[0];
+	    char loc = maze[rown][coln];
+	    if(loc == ' ' || loc == 'E'){
+		maze[row][col] = '@';
+		int solv = solve(rown, coln, level + 1);
+		if(solv == -1) maze[rown][coln] = '.';
+		else return solv;
+	    }
+	}
+		
 
 	return -1;
     }
