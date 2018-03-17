@@ -3,7 +3,7 @@ import java.util.*;
 
 public class USACO{
 
-
+    //BRONZE
     public static int bronze(String filename){
 	int total = 0;
 	try{
@@ -58,12 +58,70 @@ public class USACO{
 	return total * 72 * 72;
     }
 
+    //SILVER
+    public static int silver(String filename){
+	try{
+	    Scanner travel = new Scanner(new File(filename));
+	    int rows = travel.nextInt();
+	    int cols = travel.nextInt();
+	    char[][] map = new char[rows][cols];
+	    int[][] now = new int[rows][cols];
+	    int[][] then = new int[rows][cols];
+	    int time = travel.nextInt();
 
+	    System.out.println(travel.nextLine());
 
-	//    public static int silver(String filename){
+	    for(int r = 0; r < rows; r++){
+		String s = travel.nextLine();
+		for(int c = 0; c < cols; c++){
+		    map[r][c] = s.charAt(c);
+		}
+	    }
 
-		    // }
+	    int sRow = travel.nextInt() - 1;
+	    int sCol = travel.nextInt() - 1;
+	    int eRow = travel.nextInt() - 1;
+	    int eCol = travel.nextInt() - 1;
+	    now[sRow][sCol] = 1;
+	    for(int count = 0; count < time; count++){
+		then = now;
+		now = new int[rows][cols];
+		
+		for(int r = 0; r < rows; r++){
+		    for(int c = 0; c < cols; c++){
+			int total = 0;
+			
+			if(map[r][c] != '*' && then[r][c] == 0){
+			    if(r+1 > rows && map[r+1][c] != '*'){
+				total += then[r+1][c];
+			    }
+			    
+			    if(r-1 > -1 && map[r-1][c] != '*'){
+				total += then[r-1][c];
+			    }
 
+			    if(c+1 < cols && map[r][c+1] != '*'){
+				total += then[r][c+1];
+			    }
+
+			    if(c-1 > -1 && map[r][c-1] != '*'){
+				total += then[r][c-1];
+			    }
+			}
+
+			now[r][c] = total;
+		    }
+		}
+	    }
+
+	    return now[eRow][eCol];
+	}
+	catch(FileNotFoundException e){
+	    System.out.println("wya");
+	}
+	return -1;
+    }
+		    
 }
 
     
