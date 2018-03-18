@@ -1,3 +1,4 @@
+import java.util.*;
 public class Quick{
 
 
@@ -17,15 +18,17 @@ public class Quick{
 		small++;
 	    }
 	  
-	    if(data[small] > pivot ]){
+	    if(data[small] > pivot){
 	    swap(data,small,large);
 		large--;
 	    }
 	swap(data,large,start);   
 	return large;
 	       
+	}
     }
-    public static swap(int[] data,int x, int y){
+    
+    private static swap(int[] data,int x, int y){
 	int temp = data[x];
 	data[x] = data[y];
 	data[y] = temp;
@@ -61,17 +64,24 @@ public class Quick{
 	}
 	return lt;	
     }
+    
 
 	 	   
     public static int quickSelect(int[]ary,int k){
-
-
+	int start = 0;
+	int end = ary.length-1;
+	int i = end;
+	i = partition(ary,start,end);
+	
+	System.out.println(Arrays,toString(ary));
+	return ary[k];
     }
 
-	   
-    public static void quickSort(int[]ary){
+    
+    //   public static void quickSort(int[]ary){
 
-    }
+    //  }
+    
 }
 
 
@@ -81,4 +91,3 @@ public class Quick{
 
 
 
-} 
