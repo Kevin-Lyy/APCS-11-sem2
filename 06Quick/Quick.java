@@ -64,30 +64,27 @@ public class Quick{
 	}
 	return lt;	
     }
-    
 
-	 	   
+ 
     public static int quickSelect(int[]ary,int k){
-	int start = 0;
-	int end = ary.length-1;
-	int i = end;
-	i = partition(ary,start,end);
 	
-	System.out.println(Arrays,toString(ary));
 	return ary[k];
     }
 
     
-    //   public static void quickSort(int[]ary){
-
-    //  }
+    public static void quickSort(int[]ary){
+	int start = 0;
+	int end = ary.length -1;
+	if(end >= 2){
+	    return partition(ary,start,end);
+	    end = end/2;
+	}
+	
+	return quickSort(ary);
+    }
     
 }
 
-
-
-
-	
 
 
 
