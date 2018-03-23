@@ -1,10 +1,25 @@
 import java.util.*;
 public class  Merge{
 
-    private static void merge(int[] data, int[] temp,int lo,int mid,int hi){
+    private static void merge(int[] data, int[] temp,int lo,int hi){
+	mid = (lo + hi)/2;
 	int start = lo;
-	int start2 = mid;
-	int l = lo;
+	int midpoint = mid;
+	int tStart = lo;
+
+	while(start < mid && midpoint <= hi && l <= hi){
+	    if(temp[start] < tempstart[midpoint]){
+		data[tStart] = temp[start];
+		start++;
+		l++;
+	    }
+	    else{
+		data[tStart] = temp[midpoint];
+		midpoint++;
+		l++;
+	    }
+	}
+	
 	
 
     }
