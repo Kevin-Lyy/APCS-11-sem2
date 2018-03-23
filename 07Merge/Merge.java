@@ -11,16 +11,24 @@ public class  Merge{
 	    if(temp[start] < tempstart[midpoint]){
 		data[tStart] = temp[start];
 		start++;
-		l++;
+		tStart++;
 	    }
 	    else{
 		data[tStart] = temp[midpoint];
 		midpoint++;
-		l++;
+		tStart++;
 	    }
 	}
-	
-	
+	while(start < mid && tStart <= hi){
+	    data[tStart] = temp[start];
+	    start++;
+	    tStart++;
+	}
+	while(midpoint < hi && tStart <= hi){
+	    data[tStart] = temp[midpoint];
+	    midpoint++;
+	    tStart++;
+	}
 
     }
 
