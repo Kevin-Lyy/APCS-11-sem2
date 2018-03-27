@@ -67,22 +67,26 @@ public class Quick{
 
  
     public static int quickSelect(int[]ary,int k){
-	
+	quickSort(ary);
+    
 	return ary[k];
     }
 
     
     public static void quickSort(int[]ary){
-	int start = 0;
-	int end = ary.length -1;
-	if(end >= 2){
-	    return partition(ary,start,end);
-	    end = end/2;
-	}
-	
-	return quickSort(ary);
+	int s = 0;
+	int e = ary.length-1;
+	return quickSort(ary,s,e);
     }
-    
+
+    public static void quickSort(int[] ary, int star,t int end){
+	while(start <= end){
+	    pivot = dutchPartition(ary,start,end);
+	    quickSort(ary,start,pivot);
+	    start++;
+	    quickSort(ary,pivot+1,end);
+	    end--;
+	}
 }
 
 
