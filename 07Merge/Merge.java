@@ -41,7 +41,7 @@ public class  Merge{
 
     public static void msort(int[] data, int[] temp, int lo, int hi){
 	int mid = (lo+hi)/2;
-	if(lo >= h)i{
+	if(lo >= hi){
 	    return data;
 	}
 	msort(temp,data,lo,mid);
@@ -54,4 +54,3 @@ public class  Merge{
     }
 }
 
-//no
