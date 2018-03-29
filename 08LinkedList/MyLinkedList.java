@@ -1,4 +1,9 @@
-private class Node{
+public class MyLinkedList{
+    Node first;
+    Node last;
+    int length;
+    
+    private class Node{
     Node next,prev;
     int data;
 
@@ -35,20 +40,14 @@ private class Node{
     }
 
     private String toString(){
+	String nodeStr = ""
 	while node != null{
-
-
-	}
+		
+	    }
+    }
 
     }
-    
-
-}
-
-public class MyLinkedList{
-    Node first;
-    Node last;
-    int length;
+	
 
     public MyLinkedList(){
 	String linkedList = "";
