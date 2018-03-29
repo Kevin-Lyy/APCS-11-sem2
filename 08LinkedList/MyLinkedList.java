@@ -1,50 +1,43 @@
 public class MyLinkedList{
-    Node first;
-    Node last;
-    int length;
+    private Node start,end;
+    private int size;
     
     private class Node{
     Node next,prev;
     int data;
 
-    private Node getNext(){
-	return next;
+	public Node getNext(){
+	    return next;
+	}
 
-    }
+	public void setNext(Node n){
+	    next = n;
+	    this.next = next;
+	}
 
-    private void setNext(Node n){
-	next = n;
-	this.next = next;
+	public Node getPrev(){
+	    return prev;
+	}
 
-    }
+	public void setPrev(Node p){
+	    prev = p;
+	    this.prev = prev;
+	}
 
-    private Node getPrev(){
-	return prev;
+	public int getValue(){
+	    return data;
+	}
 
-    }
+	public void setValue(int d){
+	    data = d;
+	    this.data = data;
+	}
 
-    private void setPrev(Node p){
-	prev = p;
-	this.prev = prev;
-
-    }
-
-    private int getValue(){
-	return data;
-
-    }
-
-    private void setValue(int d){
-	data = d;
-	this.data = data;
-    }
-
-    private String toString(){
-	String nodeStr = ""
-	while node != null{
-		
-	    }
-    }
+	public String toString(){
+	    String nodeStr = ""
+		while node != null{
+		    }
+	}
 
     }
 	
@@ -53,11 +46,22 @@ public class MyLinkedList{
 	String linkedList = "";
     }
 
-    public boolean add(int value){
+    public boolean add(Integer newData){
+	Node newNode = new Node(null,end,newData);
+	end = newNode
+	return true;
+    }
 
+    public void add(int index, Integer value){
+	if(index > length){
+	    throw new ArrayIndexOutOfBoundsException("index out of bounds");
+	}
+	
+	
     }
 
     public int size(){
+	return size;
 
     }
 
@@ -65,11 +69,16 @@ public class MyLinkedList{
 
     }
 
-    public int get(int index){
+    private void clear(){
+
+    }
+    
+
+    public Integer get(int index){
 
     }
 
-    public int set(int index, int newValue){
+    public Integer set(int index, int newValue){
 
     }
 
