@@ -6,6 +6,10 @@ public class MyLinkedList{
     Node next,prev;
     int data;
 
+	public Node(){
+
+	}
+
 	public Node getNext(){
 	    return next;
 	}
@@ -43,7 +47,7 @@ public class MyLinkedList{
 	
 
     public MyLinkedList(){
-	String linkedList = "";
+	size = 0;
     }
 
     public boolean add(Integer newData){
@@ -56,8 +60,8 @@ public class MyLinkedList{
 	if(index > length){
 	    throw new ArrayIndexOutOfBoundsException("index out of bounds");
 	}
-	
-	
+
+		
     }
 
     public int size(){
