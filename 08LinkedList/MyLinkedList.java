@@ -6,8 +6,8 @@ public class MyLinkedList{
     Node next,prev;
     int data;
 
-	public Node(){
-
+	public Node(Integer value){
+	    data = value;
 	}
 
 	public Node getNext(){
@@ -15,8 +15,7 @@ public class MyLinkedList{
 	}
 
 	public void setNext(Node n){
-	    next = n;
-	    this.next = next;
+	   next = n;
 	}
 
 	public Node getPrev(){
@@ -25,7 +24,6 @@ public class MyLinkedList{
 
 	public void setPrev(Node p){
 	    prev = p;
-	    this.prev = prev;
 	}
 
 	public int getValue(){
@@ -34,15 +32,27 @@ public class MyLinkedList{
 
 	public void setValue(int d){
 	    data = d;
-	    this.data = data;
 	}
 
 	public String toString(){
-	    String nodeStr = ""
-		while node != null{
-		    }
+	    return data +"";
 	}
 
+    }
+
+    
+    private Node getNode(int index){
+	Node nodeN = start;
+	int c = 0;
+
+	while (nodeN != null){
+	    if(c == index){
+		return nodeN;
+	    }
+	    c++;
+	    nodeN = nodeN.getNext();
+	}
+	return nodeN;
     }
 	
 
@@ -50,40 +60,186 @@ public class MyLinkedList{
 	size = 0;
     }
 
-    public boolean add(Integer newData){
-	Node newNode = new Node(null,end,newData);
-	end = newNode
-	return true;
-    }
-
-    public void add(int index, Integer value){
-	if(index > length){
-	    throw new ArrayIndexOutOfBoundsException("index out of bounds");
-	}
-
-		
-    }
-
     public int size(){
 	return size;
 
     }
-
-    public string toString(){
-
-    }
-
+    
     private void clear(){
+	size = 0;
 
     }
     
+    public boolean add(Integer newData){
+	if(size() == 0){
+	    start = new Node(newData);
+	    end = start;
+	}
+	else {
+	    Node newNode = new Node(newData);
+	    end.setNext(newNode);
+	    newNode.setPrev(end);
+	    end = newNode;
+	}
+	size++;
+	return true;
+    }
+    
+
+    public void add(int index, Integer value){
+	if(index > size || index < 0){
+	    throw new IndexOutOfBoundsException();
+	}
+
+	Node newNode = new Node(value);
+	Node Nindex = start;
+	int c = 0;
+	while(c <= index){
+	    if(c == index){
+		if(index == 0){
+		    newNode.setNext(Nindex);
+		    Nindex.setPrev(newNode);
+		    start = newNode;
+		}
+		else if(index == (size()-1)){
+		    newNode.setPrev(end);
+		    Nindex.setNext(newNode);
+		    end = newNode;
+		}
+		else{
+		    newNode.setNext(Nindex);
+		    newNode.setPrev(Nindex.getPrev());
+		    Nindex.setPrev(newNode);
+	    }
+	    c++;
+	    Nindex = Nindex.getNext();
+	    }
+	}
+    }
+
+    public int indexOf(Integer value){
+	int c = 0;
+	Node index = start;
+	while(index != null){
+	    if(index.getValue() == value){
+		    return c;
+		}
+	    c++;
+	    index = index.getNext();
+	}
+	return -1;
+    }
+
+
+    public String toString(){
+	if(size == 0){
+	    return "[]";
+	}
+
+	String str = "[ ";
+	Node index = start;
+	while(index != null){
+	    if(index.getNext() != null){
+		str = str + index.getValue() + " , ";
+	    }
+	    else {
+		str = str + index.getValue() + " ] ";
+	    }
+	    index = index.getNext();
+	}
+	return str;
+
+    }
+
 
     public Integer get(int index){
+	if(index > size || index < 0){
+	    throw new IndexOutOfBoundsException();
+	}
+	int c = 0;
+	Node value = start;
+	while(value != null){
+	    if(c == index){
+		return value.getValue();		   
+		}
+	    c++;
+	    value = value.getNext();
+	}
+	return value.getValue();
 
     }
 
     public Integer set(int index, int newValue){
+	if(index > size || index < 0){
+	    throw new IndexOutOfBoundsException();
+	}
+	
+	int c = 0;
+	int old = 0;
+	Node value = start;
+	while(value != null){
+	    if(c == index){
+		old = value.getValue();
+		value.setValue(newValue);
+		return old;
+		}
+	    c++;
+	    value = value.getNext();
+	}
+	return old;
 
     }
 
+    
+    public boolean remove(Integer value){
+	Node index = start;
+	while(index != null){
+	    if(index.getValue() == value){
+		if(index.equals(start)){
+		    start = index.getNext();
+		}
+		else if(index.equals(end)){
+		    end = end.getPrev();
+		    end.setNext(null);
+		}
+		else{
+		    index.getNext().setPrev(index.getPrev());
+		    index.getPrev().setNext(index.getNext());
+		}
+		size--;
+		return true;
+	    }
+	    index = index.getNext();	
+	}
+	return false;
+    }
+	
+    public Integer remove(int index){
+	if(index > size || index < 0){
+	    throw new IndexOutOfBoundsException();
+	}
+
+	int c = 0;
+	Node Nindex = start;
+	while(c <= index){
+	    if(c == index){
+		if(index ==0){
+		    start = Nindex.getNext();
+		}
+		else if(index == (size()-1)){
+		    end = Nindex.getPrev();
+		    end.setNext(null);
+		}
+		else{
+		    Nindex.getNext().setPrev(Nindex.getPrev());
+		    Nindex.getPrev().setNext(Nindex.getNext());
+		}
+		size--;
+		return Nindex.getValue();
+	    }
+	    c++;
+	}
+	return Nindex.getValue();
+    }
+ 
 }
