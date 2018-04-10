@@ -40,13 +40,11 @@ public class MyLinkedList{
 
     }
 
-    
-	
-
     public MyLinkedList(){
 	size = 0;
     }
-    
+
+    //returns node at given index
     private Node getNode(int index){
 	Node nodeN = start;
 	int c = 0;
@@ -63,16 +61,14 @@ public class MyLinkedList{
 
     public int size(){
 	return size;
-
     }
-    
     public void clear(){
 	size = 0;
-
     }
-    
+
+    //adds at end of the list 
     public boolean add(Integer newData){
-	if(size() == 0){
+	if(size == 0){
 	    start = new Node(newData);
 	    end = start;
 	}
@@ -85,8 +81,8 @@ public class MyLinkedList{
 	size++;
 	return true;
     }
-    
 
+    //adds value at index
     public void add(int index, Integer value){
 	if(index == 0 && size == 0){
 	    add(value);
@@ -94,16 +90,19 @@ public class MyLinkedList{
 	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
 	}
+	
 	Node newNode = new Node(value);
 	Node Nindex = start;
 	int c = 0;
 	while(c <= index){
 	    if(c == index){
+		//at the start
 		if(index == 0){
 		    newNode.setNext(Nindex);
 		    Nindex.setPrev(newNode);
 		    start = newNode;
 		}
+		//at the end
 		else if(index == (size()-1)){
 		    end.setNext(newNode);		 
 		    newNode.setPrev(end);
@@ -122,6 +121,7 @@ public class MyLinkedList{
 	    }
     }
 
+    //returns the index of the first time value appears
     public int indexOf(Integer value){
 	int c = 0;
 	Node index = start;
@@ -156,7 +156,7 @@ public class MyLinkedList{
 
     }
 
-
+    //returns value of index
     public Integer get(int index){
 	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
@@ -174,6 +174,7 @@ public class MyLinkedList{
 
     }
 
+    //channges value at indext into new value
     public Integer set(int index, int newValue){
 	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
@@ -195,7 +196,7 @@ public class MyLinkedList{
 
     }
 
-    
+    //deletes value(first appearence)
     public boolean remove(Integer value){
 	Node index = start;
 	while(index != null){
@@ -218,7 +219,8 @@ public class MyLinkedList{
 	}
 	return false;
     }
-	
+    
+    //removes value at index
     public Integer remove(int index){
 	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
@@ -247,7 +249,7 @@ public class MyLinkedList{
 	return Nindex.getValue();
     }
 
-    /*
+    /*TEST
 public static void main(String[] args){
      MyLinkedList a = new MyLinkedList();
 
