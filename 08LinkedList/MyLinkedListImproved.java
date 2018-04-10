@@ -1,3 +1,6 @@
+import.java.util.Iterator
+
+    
 public class MyLinkedListImproved<T>{
     private Node start,end;
     private int size;
@@ -241,6 +244,46 @@ public class MyLinkedListImproved<T>{
 	}
 	return Nindex.getValue();
     }
+
+
+    public int max(){
+	int tempMax = 0;
+	int c = 0;
+	Node index = start;
+	if(size = 0){
+	    return -1;
+	}
+	
+	while(c < size){
+	    if(tempMax < index.getValue()){
+		tempMax = index.getValue;
+	    }
+	    c++;
+	    start = start.nextValue();
+	}
+	return tempMax;
+    }
+		
+	      
+    }
+    public int min(){
+	int tempMin = 0;
+	int c = 0;
+	Node index = start;
+	if(size = 0){
+	    return -1;
+	}
+	
+	while(c < size){
+	    if(tempMin > index.getValue()){
+		tempMin = index.getValue;
+	    }
+	    c++;
+	    start = start.nextValue();
+	}
+	return tempMin;
+    }
+
  
 }
 
