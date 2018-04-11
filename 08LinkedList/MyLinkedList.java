@@ -183,23 +183,26 @@ public class MyLinkedList{
     //deletes value(first appearence)
     public boolean remove(Integer value){
 	Node index = start;
-	while(index != null){
+	if(index.equals(start)){
+	    start = index.getNext();
+	    	size--;
+		return true;
+	}
+	else if(index.equals(end)){
+	    end = end.getPrev();
+	    end.setNext(null);
+	    size--;
+	    return true;	    
+	}
+	
+	for(int c =0; c < size;c++){
 	    if(index.getValue().equals(value)){
-		if(index.equals(start)){
-		    start = index.getNext();
-		}
-		else if(index.equals(end)){
-		    end = end.getPrev();
-		    end.setNext(null);
-		}
-		else{
 		    index.getNext().setPrev(index.getPrev());
 		    index.getPrev().setNext(index.getNext());
-		}
-		size--;
-		return true;
-	    }
-	    index = index.getNext();	
+		    size--;
+		    return true;		   
+		}   
+	    index = index.getNext();
 	}
 	return false;
     }
@@ -209,27 +212,21 @@ public class MyLinkedList{
 	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
 	}
-
-	int c = 0;
-	Node Nindex = start;
-	while(c <= index){
-	    if(c == index){
-		if(index ==0){
-		    start = Nindex.getNext();
-		}
-		else if(index == (size()-1)){
-		    end = Nindex.getPrev();
-		    end.setNext(null);
-		}
-		else{
-		    Nindex.getNext().setPrev(Nindex.getPrev());
-		    Nindex.getPrev().setNext(Nindex.getNext());
-		}
-		size--;
-		return Nindex.getValue();
-	    }
-	    c++;
+	Node Nindex = start;	
+	if(index ==0){
+	    start = Nindex.getNext();
 	}
+	else if(index == (size()-1)){
+	    end = Nindex.getPrev();
+	    end.setNext(null);
+	}
+	for(int c = 0;c <= index;c++){
+	    if(c == index){
+		Nindex.getNext().setPrev(Nindex.getPrev());
+		Nindex.getPrev().setNext(Nindex.getNext());
+	    }
+	}
+	size--;
 	return Nindex.getValue();
     }
 
