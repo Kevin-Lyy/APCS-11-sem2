@@ -83,6 +83,8 @@ public class MyLinkedList{
 
     //adds value at index
     public void add(int index, Integer value){
+	Node newNode = new Node(value);	    
+        Node Nindex = start;	
 	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
 	}
@@ -96,15 +98,14 @@ public class MyLinkedList{
 	    add(value);
 	}
 	else{
-	    Node newNode = new Node(value);
-	    Node Nindex = start;
-	    
+
 	    for(int c = 0; c < index;c++){
-		if(c==index){
-	    
-		}
 		Nindex = Nindex.getNext();
 	    }
+	    newNode.setNext(Nindex);
+	    Nindex.getPrev().setNext(newNode);
+	    newNode.setPrev(Nindex.getPrev());
+	    Nindex.setPrev(newNode);
 	    size++;
 	}
     }
@@ -132,7 +133,7 @@ public class MyLinkedList{
 
 	String str = "[ ";
 	Node index = start;
-	for(int c = 0; c<= size;c++){
+	while(index != null){
 	    if(index.getNext() != null){
 		str = str + index.getValue() + " , ";
 	    }
