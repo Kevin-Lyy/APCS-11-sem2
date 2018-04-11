@@ -88,9 +88,10 @@ public class MyLinkedList{
 	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
 	}
+	
 	if(index == 0){
-	    newNode.setNext(Nindex);
-	    Nindex.setPrev(newNode);
+	    start.setPrev(newNode);
+	    newNode.setNext(start);	    
 	    start = newNode;
 	    size++;
 	}
@@ -98,7 +99,6 @@ public class MyLinkedList{
 	    add(value);
 	}
 	else{
-
 	    for(int c = 0; c < index;c++){
 		Nindex = Nindex.getNext();
 	    }
