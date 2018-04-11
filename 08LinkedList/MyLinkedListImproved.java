@@ -44,16 +44,14 @@ public class MyLinkedListImproved<T>{
     }
 
     
+    //returns node at given index
     private Node getNode(int index){
 	Node nodeN = start;
-	int c = 0;
-
-	while (nodeN != null){
+	for(int c = 0;c <= index;c++){
 	    if(c == index){
 		return nodeN;
 	    }
-	    c++;
-	    nodeN = nodeN.getNext();
+	    nodeN = nodeN.getNext();		
 	}
 	return nodeN;
     }
@@ -69,12 +67,15 @@ public class MyLinkedListImproved<T>{
     }
     
     private void clear(){
+	start = null;
+	end = null;
 	size = 0;
 
     }
     
+    //adds at end of the list 
     public boolean add(T newData){
-	if(size() == 0){
+	if(size == 0){
 	    start = new Node(newData);
 	    end = start;
 	}
@@ -87,36 +88,33 @@ public class MyLinkedListImproved<T>{
 	size++;
 	return true;
     }
-    
 
+    //adds value at index
     public void add(int index, T value){
-	if(index > size || index < 0){
+	Node newNode = new Node(value);	    
+        Node Nindex = start;	
+	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
 	}
-
-	Node newNode = new Node(value);
-	Node Nindex = start;
-	int c = 0;
-	while(c <= index){
-	    if(c == index){
-		if(index == 0){
-		    newNode.setNext(Nindex);
-		    Nindex.setPrev(newNode);
-		    start = newNode;
-		}
-		else if(index == (size()-1)){
-		    newNode.setPrev(end);
-		    Nindex.setNext(newNode);
-		    end = newNode;
-		}
-		else{
-		    newNode.setNext(Nindex);
-		    newNode.setPrev(Nindex.getPrev());
-		    Nindex.setPrev(newNode);
+	
+	if(index == 0){
+	    start.setPrev(newNode);
+	    newNode.setNext(start);	    
+	    start = newNode;
+	    size++;
+	}
+	else if(index == size){
+	    add(value);
+	}
+	else{
+	    for(int c = 0; c < index;c++){
+		Nindex = Nindex.getNext();
 	    }
-	    c++;
-	    Nindex = Nindex.getNext();
-	    }
+	    newNode.setNext(Nindex);
+	    Nindex.getPrev().setNext(newNode);
+	    newNode.setPrev(Nindex.getPrev());
+	    Nindex.setPrev(newNode);
+	    size++;
 	}
     }
 
@@ -155,42 +153,38 @@ public class MyLinkedListImproved<T>{
     }
 
 
+    //returns value of index
     public T get(int index){
-	if(index > size || index < 0){
+	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
 	}
-	int c = 0;
+
 	Node value = start;
-	while(value != null){
+	for(int c = 0;c<=index;c++){
 	    if(c == index){
-		return value.getValue();		   
+		return value.getValue();
 		}
-	    c++;
 	    value = value.getNext();
 	}
-	return value.getValue();
-
+	return -1;
     }
 
-    public T set(int index, T newValue){
-	if(index > size || index < 0){
+    //channges value at indext into new value
+    public T set(int index, int newValue){
+	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
 	}
-	
-	int c = 0;
 	int old = 0;
 	Node value = start;
-	while(value != null){
-	    if(c == index){
-		old = value.getValue();
-		value.setValue(newValue);
-		return old;
+	    for(int c = 0; c <=index; c++){
+		if(c == index){
+		    old = value.getValue();
+		    value.setValue(newValue);
+		    return old;
 		}
-	    c++;
-	    value = value.getNext();
+	    value = value.getNext(); 
 	}
 	return old;
-
     }
 
     
@@ -216,35 +210,30 @@ public class MyLinkedListImproved<T>{
 	}
 	return false;
     }
-	
-    public T remove(int index){
-	if(index > size || index < 0){
+    //removes value at index
+    public Integer remove(int index){
+	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
 	}
-
-	int c = 0;
-	Node Nindex = start;
-	while(c <= index){
-	    if(c == index){
-		if(index ==0){
-		    start = Nindex.getNext();
-		}
-		else if(index == (size()-1)){
-		    end = Nindex.getPrev();
-		    end.setNext(null);
-		}
-		else{
-		    Nindex.getNext().setPrev(Nindex.getPrev());
-		    Nindex.getPrev().setNext(Nindex.getNext());
-		}
-		size--;
-		return Nindex.getValue();
-	    }
-	    c++;
+	Node Nindex = start;	
+	if(index ==0){
+	    start = Nindex.getNext();
 	}
+	else if(index == (size()-1)){
+	    end = Nindex.getPrev();
+	    end.setNext(null);
+	}
+	for(int c = 0;c <= index;c++){
+	    if(c == index){
+		Nindex.getNext().setPrev(Nindex.getPrev());
+		Nindex.getPrev().setNext(Nindex.getNext());
+	    }
+	}
+	size--;
 	return Nindex.getValue();
     }
-
+	
+  
 
     public int max(){
 	int tempMax = 0;

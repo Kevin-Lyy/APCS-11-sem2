@@ -230,7 +230,7 @@ public class MyLinkedList{
 	return Nindex.getValue();
     }
 
-      
+    /*
 public static void main(String[] args){
      MyLinkedList a = new MyLinkedList();
 
@@ -336,6 +336,7 @@ public static void main(String[] args){
      a.clear();
      System.out.println("LinkedList: " + a.toString()); //prints an empty LinkedList
    }
+    */
     
  
 }
