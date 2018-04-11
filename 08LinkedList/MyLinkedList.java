@@ -47,14 +47,11 @@ public class MyLinkedList{
     //returns node at given index
     private Node getNode(int index){
 	Node nodeN = start;
-	int c = 0;
-
-	while (nodeN != null){
+	for(int c = 0;c <= index;c++){
 	    if(c == index){
 		return nodeN;
 	    }
-	    c++;
-	    nodeN = nodeN.getNext();
+	    nodeN = nodeN.getNext();		
 	}
 	return nodeN;
     }
@@ -63,6 +60,8 @@ public class MyLinkedList{
 	return size;
     }
     public void clear(){
+	start = null;
+	end = null;
 	size = 0;
     }
 
@@ -84,42 +83,32 @@ public class MyLinkedList{
 
     //adds value at index
     public void add(int index, Integer value){
-	if(index == 0 && size == 0){
-	    add(value);
-	}
 	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
 	}
-	
-	Node newNode = new Node(value);
-	Node Nindex = start;
-	int c = 0;
-	while(c <= index){
-	    if(c == index){
-		//at the start
-		if(index == 0){
-		    newNode.setNext(Nindex);
-		    Nindex.setPrev(newNode);
-		    start = newNode;
+	if(index == 0){
+	    newNode.setNext(Nindex);
+	    Nindex.setPrev(newNode);
+	    start = newNode;
+	    size++;
+	}
+	else if(index == size){
+	    add(value);
+	}
+	else{
+	    Node newNode = new Node(value);
+	    Node Nindex = start;
+	    
+	    for(int c = 0; c < index;c++){
+		if(c==index){
+	    
 		}
-		//at the end
-		else if(index == (size()-1)){
-		    end.setNext(newNode);		 
-		    newNode.setPrev(end);
-		    end = newNode;
-		}
-		else{
-		    newNode.setPrev(Nindex.getPrev());		    
-		    newNode.setNext(Nindex);
-		    Nindex.getPrev().setNext(newNode);		    
-		    Nindex.setPrev(newNode);
-		}
-		size++;
+		Nindex = Nindex.getNext();
 	    }
-	    c++;
-	    Nindex = Nindex.getNext();
-	    }
+	    size++;
+	}
     }
+
 
     //returns the index of the first time value appears
     public int indexOf(Integer value){
@@ -143,7 +132,7 @@ public class MyLinkedList{
 
 	String str = "[ ";
 	Node index = start;
-	while(index != null){
+	for(int c = 0; c<= size;c++){
 	    if(index.getNext() != null){
 		str = str + index.getValue() + " , ";
 	    }
@@ -161,17 +150,15 @@ public class MyLinkedList{
 	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
 	}
-	int c = 0;
+
 	Node value = start;
-	while(value != null){
+	for(int c = 0;c<=index;c++){
 	    if(c == index){
-		return value.getValue();		   
+		return value.getValue();
 		}
-	    c++;
 	    value = value.getNext();
 	}
 	return -1;
-
     }
 
     //channges value at indext into new value
@@ -179,21 +166,17 @@ public class MyLinkedList{
 	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
 	}
-	
-	int c = 0;
 	int old = 0;
 	Node value = start;
-	while(value != null){
-	    if(c == index){
-		old = value.getValue();
-		value.setValue(newValue);
-		return old;
+	    for(int c = 0; c <=index; c++){
+		if(c == index){
+		    old = value.getValue();
+		    value.setValue(newValue);
+		    return old;
 		}
-	    c++;
-	    value = value.getNext();
+	    value = value.getNext(); 
 	}
 	return old;
-
     }
 
     //deletes value(first appearence)
@@ -249,7 +232,7 @@ public class MyLinkedList{
 	return Nindex.getValue();
     }
 
-    /*TEST
+      
 public static void main(String[] args){
      MyLinkedList a = new MyLinkedList();
 
@@ -355,6 +338,6 @@ public static void main(String[] args){
      a.clear();
      System.out.println("LinkedList: " + a.toString()); //prints an empty LinkedList
    }
-    */
+    
  
 }
