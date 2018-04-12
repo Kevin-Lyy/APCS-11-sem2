@@ -1,13 +1,12 @@
 import.java.util.Iterator
 
-    
 public class MyLinkedListImproved<T>{
     private Node start,end;
     private int size;
     
     private class Node{
     Node next,prev;
-    int data;
+    T data;
 
 	public Node(Integer value){
 	    data = value;
@@ -273,6 +272,9 @@ public class MyLinkedListImproved<T>{
 	return tempMin;
     }
 
+public class Sorts{
+    
+    public static void radixsort(MyLinkedListsImproved<Integer> data){
+
  
 }
-
