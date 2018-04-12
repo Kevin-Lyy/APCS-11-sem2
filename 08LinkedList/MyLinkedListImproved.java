@@ -1,6 +1,6 @@
 import.java.util.Iterator
 
-public class MyLinkedListImproved<T>{
+public class MyLinkedListImproved<T> implements Iterable<T>{
     private Node start,end;
     private int size;
     
@@ -41,6 +41,7 @@ public class MyLinkedListImproved<T>{
 	}
 
     }
+    public Iterator<T> Iterator(){};
 
     
     //returns node at given index
@@ -251,9 +252,8 @@ public class MyLinkedListImproved<T>{
 	}
 	return tempMax;
     }
-		
-	      
-    }
+    
+		   
     public int min(){
 	int tempMin = 0;
 	int c = 0;
@@ -272,9 +272,12 @@ public class MyLinkedListImproved<T>{
 	return tempMin;
     }
 
-public class Sorts{
-    
-    public static void radixsort(MyLinkedListsImproved<Integer> data){
+    //take out all of other list and move to linkedlist, attach to end
+    //other is now empty 
+
+    public void extend(MyLinkedListImproved<T> other){
+
+    }
 
  
 }
