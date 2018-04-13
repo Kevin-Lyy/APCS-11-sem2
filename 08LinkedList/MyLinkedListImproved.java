@@ -1,6 +1,7 @@
-import.java.util.Iterator
+import java.util.Iterator;
+import java.util.*;
 
-public class MyLinkedListImproved<T> implements Iterable<T>{
+public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T>{
     private Node start,end;
     private int size;
     
@@ -8,7 +9,7 @@ public class MyLinkedListImproved<T> implements Iterable<T>{
     Node next,prev;
     T data;
 
-	public Node(Integer value){
+	public Node(T value){
 	    data = value;
 	}
 
@@ -32,7 +33,7 @@ public class MyLinkedListImproved<T> implements Iterable<T>{
 	    return data;
 	}
 
-	public void setValue(int d){
+	public void setValue(T d){
 	    data = d;
 	}
 
@@ -41,7 +42,6 @@ public class MyLinkedListImproved<T> implements Iterable<T>{
 	}
 
     }
-    public Iterator<T> Iterator(){};
 
     
     //returns node at given index
@@ -55,11 +55,12 @@ public class MyLinkedListImproved<T> implements Iterable<T>{
 	}
 	return nodeN;
     }
-	
 
+    /*
     public MyLinkedList(){
 	size = 0;
     }
+    */
 
     public int size(){
 	return size;
@@ -118,7 +119,7 @@ public class MyLinkedListImproved<T> implements Iterable<T>{
 	}
     }
 
-    public int indexOf(Integer value){
+    public int indexOf(T value){
 	int c = 0;
 	Node index = start;
 	while(index != null){
@@ -244,7 +245,7 @@ public class MyLinkedListImproved<T> implements Iterable<T>{
 	}
 	
 	while(c < size){
-	    if(tempMax < index.getValue()){
+	    if(tempMax.compareTo(index.getValue()) > 0){
 		tempMax = index.getValue;
 	    }
 	    c++;
@@ -263,7 +264,7 @@ public class MyLinkedListImproved<T> implements Iterable<T>{
 	}
 	
 	while(c < size){
-	    if(tempMin > index.getValue()){
+	    if(tempMin.compareTo(index.getValue()) < 0){
 		tempMin = index.getValue;
 	    }
 	    c++;
@@ -276,7 +277,39 @@ public class MyLinkedListImproved<T> implements Iterable<T>{
     //other is now empty 
 
     public void extend(MyLinkedListImproved<T> other){
+	this.end.setNext(other.start);
+	end = other.end;
+	size = size + other.size;
+	other.size = 0;
 
+    }
+    
+    public class MyLLIterator implements Iterator<T>{
+	private Node next;
+
+	public MyLLiterator(Node start){
+	    next = start;
+	}
+
+	public void remove(){
+	    throw new UnsupportedOoperationException();
+	}
+
+	public boolean hasNext(){
+	    return next != null;
+	}
+	public T next(){
+	    Node index = next;
+	    if (hasnext()){
+		next = next.getNext();
+	    }
+	    else{
+		throw new NoSuchElementException();
+
+	}
+    }
+    public Iterator<T> iterator(){
+	return new MyLLIterator(start);
     }
 
  
