@@ -167,15 +167,16 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 		}
 	    value = value.getNext();
 	}
-	return -1;
+	return value.getValue();
     }
 
     //channges value at indext into new value
-    public T set(int index, int newValue){
+    public T set(int index, T newValue){
 	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
 	}
-	int old = 0;
+	
+	T old = newValue;
 	Node value = start;
 	    for(int c = 0; c <=index; c++){
 		if(c == index){
@@ -189,7 +190,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     }
 
     
-    public boolean remove(Integer value){
+    public boolean remove(T value){
 	Node index = start;
 	while(index != null){
 	    if(index.getValue() == value){
@@ -212,7 +213,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	return false;
     }
     //removes value at index
-    public Integer remove(int index){
+    public T remove(int index){
 	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
 	}
@@ -237,40 +238,32 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
   
 
     public int max(){
-	int tempMax = 0;
-	int c = 0;
-	Node index = start;
-	if(size = 0){
+	if(size == 0){
 	    return -1;
 	}
-	
-	while(c < size){
-	    if(tempMax.compareTo(index.getValue()) > 0){
-		tempMax = index.getValue;
+
+	T tempMax = start.getValue();
+	for(T index:this){
+	    if(tempMax.compareTo(index) > 0){
+		tempMax = index;
 	    }
-	    c++;
-	    start = start.nextValue();
 	}
-	return tempMax;
+	return indexOf(tempMax);
     }
     
 		   
     public int min(){
-	int tempMin = 0;
-	int c = 0;
-	Node index = start;
-	if(size = 0){
+
+	if(size == 0){
 	    return -1;
 	}
-	
-	while(c < size){
-	    if(tempMin.compareTo(index.getValue()) < 0){
-		tempMin = index.getValue;
+	T tempMin = start.getValue();
+	for(T index:this){
+	    if(tempMin.compareTo(index) < 0){
+		tempMin = index;
 	    }
-	    c++;
-	    start = start.nextValue();
 	}
-	return tempMin;
+	return indexOf(tempMin);
     }
 
     //take out all of other list and move to linkedlist, attach to end
@@ -287,12 +280,12 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     public class MyLLIterator implements Iterator<T>{
 	private Node next;
 
-	public MyLLiterator(Node start){
+	public MyLLIterator(Node start){
 	    next = start;
 	}
 
 	public void remove(){
-	    throw new UnsupportedOoperationException();
+	    throw new UnsupportedOperationException();
 	}
 
 	public boolean hasNext(){
@@ -300,17 +293,19 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	}
 	public T next(){
 	    Node index = next;
-	    if (hasnext()){
+	    if (hasNext()){
 		next = next.getNext();
 	    }
 	    else{
 		throw new NoSuchElementException();
+	    }
+	    return index.getValue();
 
 	}
     }
+    
     public Iterator<T> iterator(){
 	return new MyLLIterator(start);
     }
 
- 
 }
