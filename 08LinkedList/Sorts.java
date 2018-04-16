@@ -25,8 +25,10 @@ public class Sorts{
 	    }
 	    //first sorted bucket
 	    for(int d:data){
-		bucket[d%10].add(d);
+		if(d>0){
+		    bucket[d%10].add(d);
 	    }
+		
 	    //moved to tempBucket
 	    for(int c = 0;c <= 10; c++){
 		for(int d:bucket[c]){
@@ -53,10 +55,9 @@ public class Sorts{
 			}
 		    }
 		}
-	    }		
-		
+	    }
+	    
     }
 
-    // public static void negRadixsort(){};
     
 }
