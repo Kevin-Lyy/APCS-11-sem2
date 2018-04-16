@@ -9,6 +9,10 @@ public class Sorts{
 
 	    Integer max = data.get(data.max());
 
+	    if(data.size() <= 1){
+		return ;
+	    }
+
 	    for(int c = 0; c < 21;c++){
 		if(c <= 10){
 		    bucket[c] = new ArrayList<Integer>();
@@ -17,7 +21,6 @@ public class Sorts{
 		    negBucket[c-11] = new ArrayList<Integer>();
 		}
 	    }
-
 	    int maxDigits = 0;
 	    while(max>0){
 		max = max/10;
@@ -27,6 +30,7 @@ public class Sorts{
 	    for(int d:data){
 		if(d>0){
 		    bucket[d%10].add(d);
+		}
 	    }
 		
 	    //moved to tempBucket
@@ -36,12 +40,12 @@ public class Sorts{
 		}
 		bucket[c].clear();
 	    }
-	    //
+	    
 	    if(maxDigits > 1){
 		for(int c = 2;c<=maxDigits;c++){
 		    for(int cont = 0; cont <= 10; cont++){
 			for(int d:tempBucket[cont]){
-			    bucket[d%(num)Math.pow(10,(double)c)].add(d);
+			    bucket[d%(int)Math.pow(10,(double)c)].add(d);
 			}
 			//clear out bucket
 			for(int c2 = 0;c2 <= 10; c2++){
@@ -56,8 +60,32 @@ public class Sorts{
 		    }
 		}
 	    }
-	    
+
+	    //sort neg
+	    negRadixSort(negBucket);
+	    //extend
+	    bucket.extend(negBucket);
     }
+
+    
+    public static void negRadixSort(ArrayList<Integer>[] data){
+	
+	    Integer min = data.get(data.min());
+	    int minDigits = 0;
+	    while(min>0){
+		min = min/10;
+		minDigits++;
+	    }
+	    
+	    for(int d:data){
+		if(d<0){
+		    bucket[abs(d%10)].add(d);
+		}
+	    }
+
+    }
+	
+	
 
     
 }
