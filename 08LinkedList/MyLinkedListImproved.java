@@ -67,7 +67,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 
     }
     
-    private void clear(){
+    public void clear(){
 	start = null;
 	end = null;
 	size = 0;
