@@ -99,7 +99,7 @@ public class Sorts{
 		for(int c = 2;c<=minDigits;c++){
 		    for(int cont = 0; cont <= 10; cont++){
 			for(int d:tNegBucket[cont]){
-			    negBucket[d%(int)Math.pow(10,(double)c)].add(d);
+			    negBucket[-1 * d%(int)Math.pow(10,(double)c)].add(d);
 			}
 			//clear out bucket
 			for(int c2 = 0;c2 <= 10; c2++){
