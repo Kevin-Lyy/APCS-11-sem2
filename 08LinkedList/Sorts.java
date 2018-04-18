@@ -1,48 +1,46 @@
 import java.util.*;
 public class Sorts{
     
-    public static void radixsort(MyLinkedListImproved<Integer> data){
-	@SuppressWarnings("unchecked") ArrayList<MyLinkedListImproved<Integer>>[] bucket = new ArrayList[10];
-	@SuppressWarnings("unchecked") ArrayList<MyLinkedListImproved<Integer>>[] tempBucket = new ArrayList[10];
-	@SuppressWarnings("unchecked") ArrayList<MyLinkedListImproved<Integer>>[] negBucket = new ArrayList[10];
-
-	    Integer max = data.get(data.max());
-	    Integer min = data.get(data.min());
+    	@SuppressWarnings("unchecked")public static void radixsort(MyLinkedListImproved<Integer> data){
+	    MyLinkedListImproved[] bucket = new MyLinkedListImproved[10];
+	    MyLinkedListImproved[] tempBucket = new MyLinkedListImproved[10];
+	    MyLinkedListImproved[] negBucket = new MyLinkedListImproved[10];
 	    
-
 	    if(data.size() <= 1){
 		return ;
 	    }
 
-	    for(int c = 0; c < 21;c++){
-		if(c <= 10){
-		    bucket[c] = new MyLinkedListImproved<Integer>();
-		}
-		else{
-		    negBucket[c-11] = new MyLinkedListImproved<Integer>();
-		}
-	    }
+	    Integer max = data.get(data.max());
+	    Integer min = data.get(data.min());
+	    
 	    int maxDigits = 0;
 	    while(max>0){
 		max = max/10;
 		maxDigits++;
 	    }
-	 
+	    int minDigits = 0;
+	    while(min>0){
+		min = min/10;
+		minDigits++;
+	    }
+
 	    
-	    //first sorted bucket
+	    //creating neg and reg bucket  
+	    for(int c = 0; c <= 10;c++){
+		    bucket[c] = new MyLinkedListImproved<Integer>();
+		    negBucket[c] = new MyLinkedListImproved<Integer>();
+	    }
+	    
+	    //first sorted bucket, seperates pos and neg
 	    for(int d:data){
 		if(d>0){
 		    bucket[d%10].add(d);
 		}
-	    }
-		
-	    //moved to tempBucket
-	    for(int c = 0;c <= 10; c++){
-		for(int d:bucket[c]){
-		    tempBucket[c].add(d);
+		else{
+		    negBucket[-1 * d%10].add(d);
 		}
-		bucket[c].clear();
 	    }
+	    /*broken rn
 	    
 	    if(maxDigits > 1){
 		for(int c = 2;c<=maxDigits;c++){
@@ -63,25 +61,7 @@ public class Sorts{
 		    }
 		}
 	    }
-	    for(int c = 0;c<=10;c++){
-		for(int d:bucket[c]){
-		    if(d<0){
-			negBucket[d%10 * -1].add(d);
-		    }
-		}
-	    }
-	    int minDigits = 0;
-	    while(min>0){
-		min = min/10;
-		minDigits++;
-	    }
-	    
-	    for(int c = 0;c <= 10; c++){
-		for(int d:negBucket[c]){
-		    tempBucket[c].add(d);
-		}
-		negBucket[c].clear();
-	    }
+	     
 	    if(minDigits > 1){
 		for(int c = 2;c<=minDigits;c++){
 		    for(int cont = 0; cont <= 10; cont++){
@@ -101,6 +81,7 @@ public class Sorts{
 		    }
 		}
 	    }
+	    */
 
     
 	    //extend
@@ -112,9 +93,10 @@ public class Sorts{
 	    for(int c = 0; c < 10;c++){
 		data.extend(bucket[c]);
 	    }
+	}
 	    
 	    
-    }
+	
 	    
 
 	    
