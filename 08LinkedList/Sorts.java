@@ -4,7 +4,7 @@ public class Sorts{
     	@SuppressWarnings("unchecked")public static void radixsort(MyLinkedListImproved<Integer> data){
 	    MyLinkedListImproved[] bucket = new MyLinkedListImproved[10];
 	    MyLinkedListImproved[] tempBucket = new MyLinkedListImproved[10];
-	    MyLinkedListImproved[] negBucket = new MyLinkedListImproved[10];
+	    MyLinkedListImproved[] negBucket = new MyLinkedListImproved[10];	    
 	    
 	    if(data.size() <= 1){
 		return ;
@@ -40,8 +40,24 @@ public class Sorts{
 		    negBucket[-1 * d%10].add(d);
 		}
 	    }
+
+
+
+	    //sort pos
+	    for(int c = 2;c <= maxDigits;c++){
+		for(int cont = 0;cont <=10;cont++){
+		    for (int d:bucket){
+			tempBucket[d%(int)Math.pow(10,c)].add(d);
+		    }
+		}
+	    }
+				   
+				   
+	   
+	    //sort neg
+
+		    
 	    /*broken rn
-	    
 	    if(maxDigits > 1){
 		for(int c = 2;c<=maxDigits;c++){
 		    for(int cont = 0; cont <= 10; cont++){
@@ -88,17 +104,12 @@ public class Sorts{
 	    data.clear();
 	    for(int c = 9; c >= 0;c++){
 		data.extend(negBucket[c]);
-	    }
-		    
+	    }	    
 	    for(int c = 0; c < 10;c++){
 		data.extend(bucket[c]);
 	    }
 	}
 	    
-	    
-	
-	    
-
 	    
     public static void radixsortincludingNegatives(MyLinkedListImproved<Integer> data){
 	return;
