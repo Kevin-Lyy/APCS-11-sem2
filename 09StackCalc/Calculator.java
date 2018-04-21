@@ -3,9 +3,14 @@ import java.util.*;
 public class Calculator{
     
     public static double eval(String s){
+	Stack sta = new Stack;
+	String[] splitS = s.split(" ");
+	for(int c = 0; c < splitS.length();c++){
+	    
 
     }
-    private class functions{
+    
+    private class Stack{
 	private LinkedList<Double> l = new LinkedList<>();
 	
 	public double pop(){
