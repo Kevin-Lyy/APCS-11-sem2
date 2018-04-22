@@ -3,14 +3,38 @@ import java.util.*;
 public class Calculator{
     
     public static double eval(String s){
-	Stack sta = new Stack;
+	Stack sta = new Stack();
 	String[] splitS = s.split(" ");
-	for(int c = 0; c < splitS.length();c++){
-	    
-
+	for(int c = 0; c < splitS.length;c++){
+	    if(!"+ - / * %".contains(splitS[c])){
+		sta.push(Double.parseDouble(splitS[c]));
+	    }
+	    else{
+		sta.push(evalHelp(sta.pop(),sta.pop(),splitS[c]));
+	    }		
+	}
+	return sta.pop();
+    }
+    private static double evalHelp(double n1, double n2, String op){
+	if(op.equals("+")){
+	    return n1+n2;
+	}
+	if(op.equals("-")){
+	    return n2-n1;
+	}
+	if(op.equals("/")){
+	    return n1/n2;
+	}
+	if(op.equals("*")){
+	    return n1*n2;
+	}
+	if(op.equals("%")){
+	    return n1%n2;
+	}
+	return 0;
     }
     
-    private class Stack{
+    private static class Stack{
 	private LinkedList<Double> l = new LinkedList<>();
 	
 	public double pop(){
@@ -26,9 +50,10 @@ public class Calculator{
 	}
 
     }
-
-    
-
+    public static void main(String[] args){
+	System.out.println(Calculator.eval("10 2 -"));
+    }		   
+			   
     
 }
 
