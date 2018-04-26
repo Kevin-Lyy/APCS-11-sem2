@@ -1,27 +1,63 @@
 public class ExpressionTree{
 
     public String toString(){
-
+	if(isValue()){
+	    return "" + getValue();
+	}
+	else if(isOp()){
+	    return "(" + getLeft().toString() + getOp() + getRight().toString() + ")";
+	}
+	return "";
     }
 
     public String toStringPostfix(){
-
+	if(isValue()){
+	    return "" + getValue();
+	}
+	else if(isOp()){
+	    return getLeft().toStringPostfix()+ " " + getRight().toStringPostfix()+ " " + getOp();
+	}
+	return "";
     }
 
     public String toStringPrefix(){
-
+	if(isValue()){
+	    return "" + getValue();
+	}
+	else if(isOp()){
+	    return getOp()+ " " + getLeft().toStringPrefix()+ " " + getRight().toStringPrefix();
+	}
+	return "";
     }
 
     public double evaluate(){
-
+	if(isValue()){
+	    return getValue();
+	}
+	else if(isOp()){
+	    return apply(getOp(),getLeft().evaluate(),getRight().evaluate());
+	}
+	return 0.0;
     }
 
     private double apply(char op, double a, double b){
-
+	if(op == '+'){
+	    return a + b;
+	}
+	if(op == '-'){
+	    return a - b;
+	}
+	if(op == '*'){
+	    return a * b;
+	}
+	if(op == '/'){
+	    return a / b;
+	}
+	return 0.0;
     }
 
     ///////////////////////////////////
-    private char op;
+  private char op;
   private double value;
   private ExpressionTree left,right;
   
@@ -101,5 +137,5 @@ public class ExpressionTree{
     System.out.println(ex.toStringPrefix());
     System.out.println(ex.evaluate());//10.5   
   }
-
+    
 }
