@@ -38,6 +38,7 @@ public class ExpressionTree{
 	    return apply(getOp(),getLeft().evaluate(),getRight().evaluate());
 	}
 	return 0.0;
+	
     }
 
     private double apply(char op, double a, double b){

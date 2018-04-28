@@ -4,3 +4,5 @@
 /*.java#
 /*.class
 /*.java~
+.metadata
+.project
