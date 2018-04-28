@@ -1,5 +1,5 @@
 public class MyHeap{
-	private string[] heap;
+	private String[] heap;
 	private int size;
 	private boolean minOrMax;
 	
@@ -22,9 +22,8 @@ public class MyHeap{
 		heap[a] = heap[b];
 		heap[b] = temp;
 	}
-	
 	public void pushUpMax(String heap, int index) {
-		int parent = (index -1)/2
+		int parent = (index -1)/2;
 		if(index == 0) {
 			return ;
 		}
@@ -57,5 +56,4 @@ public class MyHeap{
 	public int size() {
 		return size;
 	}
-
 }
