@@ -1,4 +1,3 @@
-import java.util.*
 public class MyHeap{
 	private string[] heap;
 	private int size;
@@ -15,7 +14,7 @@ public class MyHeap{
 			minOrMax = false;
 			heap = new String[size];
 		}
-		MyHeap();		
+		else MyHeap();		
 	}
 	//methods 
 	public void swap(int a,int b, String[] ary){
@@ -24,21 +23,31 @@ public class MyHeap{
 		heap[b] = temp;
 	}
 	
-	public void pushUpMax() {
-		for(c:heap) {
-			if(heap[c].compareTo(heap[(c*2)+1]) < 0) {
-				swap(c,c*2+1,heap);
-			}
-			else if(heap[c].compareTo(heap[(c*2)+2]) < 0) {
-				swap(c,c*2+1,heap);
-			}
+	public void pushUpMax(String heap, int index) {
+		int parent = (index -1)/2
+		if(index == 0) {
+			return ;
+		}
+		if(heap[index].compareTo(heap[parent]) > 0) {
+			swap(index,parent,heap);
+			pushUpMax(heap,parent);
+		}
+	}
+	
+	public void pushUpMin(String heap, int index){
+		int parent = (index -1)/2
+		if(index == 0) {
+			return ;
+		}
+		if(heap[index].compareTo(heap[parent]) < 0) {
+			swap(index,parent,heap);
+			pushUpMin(heap,parent);
 		}
 	}
 	
 	public void add(String s) {
 		
 	}
-	
 	public String remove() {
 		
 	}
