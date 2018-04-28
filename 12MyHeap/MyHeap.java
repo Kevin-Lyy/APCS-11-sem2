@@ -1,12 +1,24 @@
+import java.util.*
 public class MyHeap{
+	Array<String> heap = new Array<String>;
 	
-	//empty max heap
-	public MyHeap() {
-		
+	//empty max heap (use string first)
+	public MyHeap(){
+		for(c:heap) {
+			if(heap[c].compareTo(heap[(c*2)+1]) < 0) {
+				swap(c,c*2+1);
+			}
+			else if(heap[c].compareTo(heap[(c*2)+2]) < 0) {
+				swap(c,c*2+1);
+			}
+		}
 	}
 	//max or min
 	public MyHeap(boolean m) {
-		
+		if (!m) {
+			
+		}
+		MyHeap();		
 	}
 	
 	//methods 
@@ -22,7 +34,7 @@ public class MyHeap{
 		
 	}
 	public int size() {
-		
+		return heap.length();
 	}
 
 }
