@@ -45,7 +45,13 @@ public class MyHeap{
 	}
 	
 	public void add(String s) {
-		
+      heap[size-1] = s:
+      size++;
+      if(minOrMax){
+          heap.pushUpMax(heap,size-1);
+      }
+      else if(!minOrMax) heap.pushUpMin;
+      }
 	}
 	public String remove() {
 		
