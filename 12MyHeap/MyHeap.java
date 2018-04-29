@@ -29,7 +29,7 @@ public class MyHeap{
 		}
 		if(heap[index].compareTo(heap[parent]) > 0) {
 			swap(index,parent,heap);
-			pushUpMax(heap,parent);
+			return pushUpMax(heap,parent);
 		}
 	}
 	
@@ -40,7 +40,7 @@ public class MyHeap{
 		}
 		if(heap[index].compareTo(heap[parent]) < 0) {
 			swap(index,parent,heap);
-			pushUpMin(heap,parent);
+			return pushUpMin(heap,parent);
 		}
 	}
 	
