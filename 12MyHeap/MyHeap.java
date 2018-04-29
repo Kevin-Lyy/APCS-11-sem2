@@ -54,6 +54,21 @@ public class MyHeap{
       }
 	}
 	public String remove() {
+      first = heap[0];
+      int tempIndex = 0;
+      int tempChild1 = tempIndex * 2 + 1;
+      int tempChild2 = tempIndex * 2 + 2;
+
+      if(minOrMax){
+            if(heap[tempChild1]> heap[tempChild2]{ 
+                 swap(tempIndex,tempChild1,heap);
+            else(swap(tempIndex,tempChild2,heap);
+      if(!minOrMax){
+            if(heap[tempChild1]< heap[tempChild2]{ 
+                 swap(tempIndex,tempChild1,heap);
+            else(swap(tempIndex,tempChild2,heap);
+
+      return first;
 		
 	}
 	public String peek() {
