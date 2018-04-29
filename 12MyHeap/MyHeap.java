@@ -34,7 +34,7 @@ public class MyHeap{
 	}
 	
 	public void pushUpMin(String heap, int index){
-		int parent = (index -1)/2
+		int parent = (index -1)/2;
 		if(index == 0) {
 			return ;
 		}
@@ -45,36 +45,41 @@ public class MyHeap{
 	}
 	
 	public void add(String s) {
-      heap[size-1] = s:
-      size++;
-      if(minOrMax){
-          heap.pushUpMax(heap,size-1);
-      }
-      else if(!minOrMax) heap.pushUpMin;
-      }
+		heap[size-1] = s;
+		size++;
+		if(minOrMax){
+			heap.pushUpMax(heap,size-1);
+			}
+		else if(!minOrMax) heap.pushUpMin(heap,size-1);
 	}
+	
 	public String remove() {
-      first = heap[0];
-      int tempIndex = 0;
-      int tempChild1 = tempIndex * 2 + 1;
-      int tempChild2 = tempIndex * 2 + 2;
-
-      if(minOrMax){
-            if(heap[tempChild1]> heap[tempChild2]{ 
-                 swap(tempIndex,tempChild1,heap);
-            else(swap(tempIndex,tempChild2,heap);
-      if(!minOrMax){
-            if(heap[tempChild1]< heap[tempChild2]{ 
-                 swap(tempIndex,tempChild1,heap);
-            else(swap(tempIndex,tempChild2,heap);
-
+		first = heap[0];
+		int tempIndex = 0;
+		int tempChild1 = tempIndex * 2 + 1;
+		int tempChild2 = tempIndex * 2 + 2;
+		
+		if(minOrMax){
+			if(heap[tempChild1]> heap[tempChild2]{ 
+				swap(tempIndex,tempChild1,heap);
+			}
+			else(swap(tempIndex,tempChild2,heap);
+		}
+		
+		if(!minOrMax){
+			if(heap[tempChild1]< heap[tempChild2]{ 
+				swap(tempIndex,tempChild1,heap);
+			}
+			else(swap(tempIndex,tempChild2,heap);
+		}
       return first;
-		
 	}
+
+            
 	public String peek() {
-      return heap[0];
-		
+		return heap[0];
 	}
+	
 	public int size() {
 		return size;
 	}
