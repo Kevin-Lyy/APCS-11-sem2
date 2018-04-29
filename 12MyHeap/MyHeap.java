@@ -52,27 +52,43 @@ public class MyHeap{
 			}
 		else if(!minOrMax) heap.pushUpMin(heap,size-1);
 	}
-	
+	//add while loop if the children are out of bounds stop
 	public String remove() {
 		first = heap[0];
 		int tempIndex = 0;
-		int tempChild1 = tempIndex * 2 + 1;
-		int tempChild2 = tempIndex * 2 + 2;
 		
 		if(minOrMax){
-			if(heap[tempChild1]> heap[tempChild2]{ 
-				swap(tempIndex,tempChild1,heap);
+			while(tempIndex*2 + 1 < size) {
+				int tempChild1 = tempIndex * 2 + 1;
+				int tempChild2 = tempIndex * 2 + 2;
+				
+				if(heap[tempChild1]> heap[tempChild2]){ 
+					swap(tempIndex,tempChild1,heap);
+					tempIndex = tempChild1;
+				}
+				else {
+					swap(tempIndex,tempChild2,heap);
+					tempIndex = tempChild2;
+				}
 			}
-			else(swap(tempIndex,tempChild2,heap);
+			heap[tempIndex] = null;
 		}
-		
-		if(!minOrMax){
-			if(heap[tempChild1]< heap[tempChild2]{ 
-				swap(tempIndex,tempChild1,heap);
+		if(!minOrMax) {
+			while(tempIndex*2 + 1 < size) {
+				int tempChild1 = tempIndex * 2 + 1;
+				int tempChild2 = tempIndex * 2 + 2;
+				if(heap[tempChild1] < heap[tempChild2]){ 
+					swap(tempIndex,tempChild1,heap);
+					tempIndex = tempChild1;
+				}
+				else {
+					swap(tempIndex,tempChild2,heap);
+					tempIndex = tempChild2;
+				}
 			}
-			else(swap(tempIndex,tempChild2,heap);
+			heap[tempIndex] = null;
 		}
-      return first;
+		return first;
 	}
 
             
