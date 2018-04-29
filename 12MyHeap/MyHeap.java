@@ -57,6 +57,7 @@ public class MyHeap{
 		
 	}
 	public String peek() {
+      return heap[0];
 		
 	}
 	public int size() {
