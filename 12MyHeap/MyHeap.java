@@ -14,7 +14,10 @@ public class MyHeap{
 			minOrMax = false;
 			heap = new String[size];
 		}
-		else MyHeap();		
+		else {
+			minOrMax = true;
+			heap = new String[size];
+		}
 	}
 	//methods 
 	public void swap(int a,int b, String[] ary){
@@ -22,25 +25,25 @@ public class MyHeap{
 		heap[a] = heap[b];
 		heap[b] = temp;
 	}
-	public void pushUpMax(String heap, int index) {
+	public void pushUpMax(String[] heapSingle, int index) {
 		int parent = (index -1)/2;
 		if(index == 0) {
 			return ;
 		}
-		if(heap[index].compareTo(heap[parent]) > 0) {
-			swap(index,parent,heap);
-			return pushUpMax(heap,parent);
+		if(heapSingle[index].compareTo(heapSingle[parent]) > 0) {
+			swap(index,parent,heapSingle);
+			pushUpMax(heapSingle,parent);
 		}
 	}
 	
-	public void pushUpMin(String heap, int index){
+	public void pushUpMin(String[] heapSingle, int index){
 		int parent = (index -1)/2;
 		if(index == 0) {
 			return ;
 		}
-		if(heap[index].compareTo(heap[parent]) < 0) {
-			swap(index,parent,heap);
-			return pushUpMin(heap,parent);
+		if(heapSingle[index].compareTo(heapSingle[parent]) < 0) {
+			swap(index,parent,heapSingle);
+			pushUpMin(heapSingle,parent);
 		}
 	}
 	
@@ -48,13 +51,13 @@ public class MyHeap{
 		heap[size-1] = s;
 		size++;
 		if(minOrMax){
-			heap.pushUpMax(heap,size-1);
+			pushUpMax(heap,size-1);
 			}
-		else if(!minOrMax) heap.pushUpMin(heap,size-1);
+		else if(!minOrMax) pushUpMin(heap,size-1);
 	}
 	//add while loop if the children are out of bounds stop
 	public String remove() {
-		first = heap[0];
+		String first = heap[0];
 		int tempIndex = 0;
 		
 		if(minOrMax){
@@ -62,7 +65,7 @@ public class MyHeap{
 				int tempChild1 = tempIndex * 2 + 1;
 				int tempChild2 = tempIndex * 2 + 2;
 				
-				if(heap[tempChild1]> heap[tempChild2]){ 
+				if(heap[tempChild1].compareTo(heap[tempChild2]) > 0){ 
 					swap(tempIndex,tempChild1,heap);
 					tempIndex = tempChild1;
 				}
@@ -77,7 +80,7 @@ public class MyHeap{
 			while(tempIndex*2 + 1 < size) {
 				int tempChild1 = tempIndex * 2 + 1;
 				int tempChild2 = tempIndex * 2 + 2;
-				if(heap[tempChild1] < heap[tempChild2]){ 
+				if(heap[tempChild1].compareTo(heap[tempChild2]) < 0){ 
 					swap(tempIndex,tempChild1,heap);
 					tempIndex = tempChild1;
 				}
