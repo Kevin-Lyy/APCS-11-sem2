@@ -1,31 +1,33 @@
-public class MyHeap{
-	private String[] heap;
+public class MyHeap<T extends Comparable<T>>{
+	private T[] heap;
 	private int size;
 	private boolean minOrMax;
 	
 	//empty max heap (use string first)
+	@SuppressWarnings("unchecked")
 	public MyHeap(){
 		minOrMax = true;
-		heap = new String[size];		
+		heap = (T[])new Comparable[10];	
 	}
 	//max or min
+	@SuppressWarnings("unchecked")
 	public MyHeap(boolean max) {
 		if (!max) {
 			minOrMax = false;
-			heap = new String[size];
+			heap = (T[])new Comparable[10];
 		}
 		else {
 			minOrMax = true;
-			heap = new String[size];
+			heap = (T[])new Comparable[10];
 		}
 	}
 	//methods 
-	public void swap(int a,int b, String[] ary){
-		String temp = heap[a];
+	public void swap(int a,int b, T[] ary){
+		T temp = heap[a];
 		heap[a] = heap[b];
 		heap[b] = temp;
 	}
-	public void pushUpMax(String[] heapSingle, int index) {
+	public void pushUpMax(T[] heapSingle, int index) {
 		int parent = (index -1)/2;
 		if(index == 0) {
 			return ;
@@ -36,7 +38,7 @@ public class MyHeap{
 		}
 	}
 	
-	public void pushUpMin(String[] heapSingle, int index){
+	public void pushUpMin(T[] heapSingle, int index){
 		int parent = (index -1)/2;
 		if(index == 0) {
 			return ;
@@ -47,7 +49,7 @@ public class MyHeap{
 		}
 	}
 	
-	public void add(String s) {
+	public void add(T s) {
 		heap[size-1] = s;
 		size++;
 		if(minOrMax){
@@ -56,8 +58,8 @@ public class MyHeap{
 		else if(!minOrMax) pushUpMin(heap,size-1);
 	}
 	//add while loop if the children are out of bounds stop
-	public String remove() {
-		String first = heap[0];
+	public T remove() {
+		T first = heap[0];
 		int tempIndex = 0;
 		
 		if(minOrMax){
@@ -95,7 +97,7 @@ public class MyHeap{
 	}
 
             
-	public String peek() {
+	public T peek() {
 		return heap[0];
 	}
 	
