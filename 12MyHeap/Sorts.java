@@ -1,7 +1,4 @@
-import java.util.*;
-
 public class Sorts<T extends Comparable<T>>{
-//use int to store greatest s
 	public void HeapSort(T[] heap){
 		int tempIndex = 0;
 		while(tempIndex* 2 + 1 < heap.length) {
@@ -23,5 +20,9 @@ public class Sorts<T extends Comparable<T>>{
 		T temp = ary[a];
 		ary[a] = ary[b];
 		ary[b] = temp;
+	}
+	public static void main(String[] args) {
+		int[] word= {10,9,8,7,6,5};
+		HeapSort(word);
 	}
 }
