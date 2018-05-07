@@ -1,4 +1,3 @@
-
 public interface Frontier{ 
 
 	public location next();
@@ -6,6 +5,13 @@ public interface Frontier{
 	public boolean hasNext();
 
 	public class Location{
+		private int x,y;
+	    private Location previous;
+
+	    public Location(int _x, int _y, Location prev){
+	    }
+	}
+
 	
 	}
 }
