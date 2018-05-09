@@ -1,11 +1,11 @@
 import java.util.*;
 public class RunningMedian{
-	
+
 	private double currentMedian;
 	MyHeap<Double> lrg;
 	MyHeap<Double> sml;
 	public int size; 
-	
+	@SuppressWarnings("unchecked")
 	public RunningMedian(){
 		lrg = new MyHeap(false);
 		sml = new MyHeap();
@@ -32,4 +32,5 @@ public class RunningMedian{
 		if(size == 0) throw new NoSuchElementException() ;
 		return currentMedian;		
 	}
+
 }
