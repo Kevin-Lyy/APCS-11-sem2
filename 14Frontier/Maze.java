@@ -15,7 +15,10 @@ public class Maze{
   YOU MUST COMPLETE THIS METHOD!!!
   */
   public Location[] getNeighbors(Location L){
-    return null;
+    //return null;
+	if(L.getRow > 0 && L.getCol > 0 && L.length() && L[0].length()) {
+		return ;
+	}
   }
 
   public Location getStart(){
@@ -36,6 +39,7 @@ public class Maze{
   public void clearTerminal(){
     System.out.println(CLEAR_SCREEN+"\033[1;1H");
   }
+  
   public Maze(String filename){
     ArrayList<char[]> lines = new ArrayList<char[]>();
     int startr=-1, startc=-1;

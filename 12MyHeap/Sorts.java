@@ -18,6 +18,7 @@ public class Sorts<T extends Comparable<T>>{
 			heap[heap.length] = startOfSort;
 		}
 	}
+	
 	public void heaped(T[] given) {
 		int parent = 0;
 		while(parent*2+1 < given.length) {
@@ -31,6 +32,7 @@ public class Sorts<T extends Comparable<T>>{
 			parent = child2;
 		}
 	}
+	
 	public void swap(int a,int b, T[] ary){
 		T temp = ary[a];
 		ary[a] = ary[b];
