@@ -1,6 +1,14 @@
 import java.io.*;
 import java.io.FileNotFoundException;
 import java.util.*;
+
+public class Location{
+    private int x,y;
+    private Location previous;
+
+    public Location(int _x, int _y, Location prev){
+    }
+}
 public class Maze{
   private static final String CLEAR_SCREEN =  "\033[2J";
   private static final String HIDE_CURSOR =  "\033[?25l";
