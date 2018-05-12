@@ -3,7 +3,7 @@ public class Quick{
 
 
     public static int partition(int[] data, int start, int end){
-	int pivotIndex = (int)(Math.random()*(end-start)+start);
+	int pivotIndex = (int)(Math.random()*(end-start))+start;
 	int pivot = data[pivotIndex];
 	int small = start;
 	int large = end;
@@ -35,8 +35,8 @@ public class Quick{
 	data[y] = temp;
     }
 
-    public static int dutchPartition(int[] data, int start, int end){
-	int pivotIndex = (int)(Math.random()*(end-start)+start);
+    public static int[] dutchPartition(int[] data, int start, int end){
+	int pivotIndex = (int)(Math.random()*(end-start))+start;
 	int pivot = data[pivotIndex];
 	int small = start;
 	int large = end;
@@ -44,7 +44,6 @@ public class Quick{
 	int lt = start;
 	int gt = end;
 
-	swap(data,start,pivotIndex);
 
 	while (i <= gt){
 	    if(data[i] == pivot){
@@ -57,19 +56,19 @@ public class Quick{
 		    lt++;
 		    i++;
 		}
-		if(data[i] > pivot){
+		else {
 		    swap(data,gt,i);
 		    gt--;
 		}
 	    }
 	}
-	return lt;	
+	int tl[] = {lt,i};
+	return tl;	
     }
 
  
     public static int quickSelect(int[]ary,int k){
 	quickSort(ary);
-    
 	return ary[k];
     }
 
@@ -81,14 +80,22 @@ public class Quick{
     }
 
     public static void quickSort(int[] ary, int start, int end){
-	while(start <= end){
-	    int pivot = dutchPartition(ary,start,end);
-	    quickSort(ary,start,pivot);
-	    start++;
-	    quickSort(ary,pivot+1,end);
-	    end--;
+	if(start < end){
+	    int[] pivot = dutchPartition(ary,start,end);
+	    quickSort(ary,start,pivot[0]-1);
+	    quickSort(ary,pivot[1],end);
 	}
     }
+/*
+	public static void main(String[] ary){
+		int[] data = {4, -10, 18, 6, 16, -8, 3, -1, 9, -12};
+		quickSort(data);
+		
+
+	System.out.println(data);
+	*/
+
+	}
 }
 
 
