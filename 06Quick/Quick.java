@@ -86,16 +86,7 @@ public class Quick{
 	    quickSort(ary,pivot[1],end);
 	}
     }
-/*
-	public static void main(String[] ary){
-		int[] data = {4, -10, 18, 6, 16, -8, 3, -1, 9, -12};
-		quickSort(data);
-		
 
-	System.out.println(data);
-	*/
-
-	}
 }
 
 
