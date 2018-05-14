@@ -24,9 +24,10 @@ public class Maze{
   */
   public Location[] getNeighbors(Location L){
     //return null;
-	if(L.getRow > 0 && L.getCol > 0 && L.length() && L[0].length()) {
-		return ;
+	if(L.getRow > 0 && L.getCol > 0 && L.getRow < L.length() && L.getCol < L[0].length()) {
+		return (maze[L.getRow+1][L.getCol],maze[L.getRow-1][L.getCol],maze[L.getRow][L.getCol+1],maze[L.getRow][L.getCol-1]);
 	}
+	if(L.)
   }
 
   public Location getStart(){

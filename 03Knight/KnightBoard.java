@@ -2,43 +2,35 @@ public class KnightBoard{
     
     public int[][] board;
     public static int[][] addKnight = {{2,1},{2,-1},{1,2},{1,-2},{-2,1},{-2,-1},{-1,2},{-1,-2}};
-    public int rows,cols;
+    public int rows;
+    public int cols;
     
     public KnightBoard(int startingRows, int startingCols){
 	if(startingRows < 0 || startingCols < 0){
 	    throw new IllegalArgumentException();
 	}
 	
-	for (int r = 0; r < startingRows; r++){
-	    for(int c = 0; c < startingCols; c++){
-		board[r][c] = 0;
-	    }
-	}
+	board= new int[startingRows][startingCols];
 	rows = startingRows;
 	cols = startingCols;
-
     }
 
     public String toString(){
-	String StringBoard = "/n";
-	for(int y = 0; y < rows;y++){
-	    for(int x = 0; x < cols+1; x++){
-		if(x+y < 6){
-		    if(x == cols+1){
-			StringBoard += "/n";
-		    }
-		    StringBoard += board[y][x];
-		}
-		if(x+y > 6){
-		    if(x == cols+1){
-			StringBoard += "/n";
-		    }
-		    if(board[y][x] < 10){
-			StringBoard += "_" + board[y][x];
-		    }
-		    StringBoard += board[y][x];
-		}
+    	
+	String StringBoard = "\n";
+	for(int x = 0; x < board.length ;x++){
+	    for(int y = 0; y < board[x].length; y++){
+	    	if(board[x][y] == 0) {
+	    		StringBoard += "_";
+	    	}
+	    	else if(board[x][y] < 10) {
+	    		StringBoard += " " + board[x][y] + " ";
+			}
+	    	else { 
+	    		StringBoard += board[x][y] + " ";
+	    	}
 	    }
+	    StringBoard += "\n";
 	}
 	return StringBoard;
 
@@ -46,6 +38,8 @@ public class KnightBoard{
 
     public boolean solve(int startingRow, int startingCol){
 	if(startingRow < 0 || startingCol < 0)throw new IllegalArgumentException();
+	if(startingRow > board.length || startingCol > board[0].length)throw new IllegalArgumentException();
+	
 	for(int[] x: board){
 	    for(int y:x){
 		if(y!=0) throw new IllegalStateException();
@@ -55,16 +49,15 @@ public class KnightBoard{
     }
 
     private boolean solveH(int row, int col, int level){
-	if(level == row*col){
-	    board[row][col] = level;
+	if(level == rows*cols){
+		board[row][col] = level;
 	    return true;
 	}
 
 	for(int aKnight[]: addKnight){
 	    int temprow = row + aKnight[0];
 	    int tempcol = col + aKnight[1];
-	    if(board[row][col] == 0 && temprow >=0 && temprow < row
-	       && tempcol >= 0 && tempcol < col){
+	    if(temprow >=0 && temprow < rows && tempcol >= 0 && tempcol < cols && board[temprow][tempcol] == 0){
 		board[row][col] = level;
 		if(solveH(temprow,tempcol,level+1)){
 			return true;
@@ -72,6 +65,7 @@ public class KnightBoard{
 		board[row][col] = 0;
 	    }
 	}
+	
 	return false;		   		
     }
 
@@ -87,23 +81,21 @@ public class KnightBoard{
 
     public int countH(int row, int col, int level){
 	int solutions = 0;
-	
-	if(level == row*col){
-	    board[row][col] = level;
+	if(level == rows*cols){
 	    return 1;
 	}
 
 	for(int aKnight[]: addKnight){
 	    int temprow = row + aKnight[0];
 	    int tempcol = col + aKnight[1];
-	    if(board[row][col] == 0 && temprow >=0 && temprow < row
-	       && tempcol >= 0 && tempcol < col){
-		board[row][col] = level;
+	    if(temprow >=0 && temprow < rows && tempcol >= 0 && tempcol < cols && board[temprow][tempcol] == 0){
+			board[row][col] = level;
 		solutions += countH(temprow,tempcol,level+1);
 		board[row][col] = 0;
 	    }
 	}
 	return solutions;		   		
     }
-
+    
+  
 }

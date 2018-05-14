@@ -2,7 +2,7 @@ import java.util.*;
 public class  Merge{
 
     private static void merge(int[] data, int[] temp,int lo,int hi){
-	int mid = (lo + hi)/2;
+	int mid = (lo + hi)/2 + 1;
 	int start = lo;
 	int midpoint = mid;
 	int tStart = lo;
@@ -40,17 +40,20 @@ public class  Merge{
     }
 
     public static void msort(int[] data, int[] temp, int lo, int hi){
-	int mid = (lo+hi)/2;
 	if(lo >= hi){
 	    return ;
 	}
+	for(int c = lo; c < hi; c++){
+	    temp[c] = data[c];
+	}
+	int mid = (lo+hi)/2;
+
 	msort(temp,data,lo,mid);
 	msort(temp,data,mid+1,hi);
 	merge(data,temp,lo,hi);
 
-	for(int c = lo; c < hi; c++){
-	    temp[c] = data[c];
-	}
+
     }
+   
 }
 

@@ -32,6 +32,7 @@ public class MyDeque<T>{
 	if(value == null){
 	    throw new NullPointerException();
 	}
+	resize();
 	if(start == 0){
 	    start = array.length-1;
 	}
@@ -46,6 +47,7 @@ public class MyDeque<T>{
 	if(value == null){
 	    throw new NullPointerException();
 	}
+	resize();
 	if(end == array.length-1){
 	    end = 0;
 	}
@@ -63,7 +65,7 @@ public class MyDeque<T>{
 	T first = array[start];
 	array[start] = null;
 	size--;	
-	if(start == array.length){
+	if(start == array.length-1){
 	    start = 0;
 	}
 	else{
@@ -88,6 +90,7 @@ public class MyDeque<T>{
 	}
 	return last;
     }
+    
     public T getFirst(){
 	if (size == 0){
 	    throw new NoSuchElementException();
@@ -104,5 +107,19 @@ public class MyDeque<T>{
 	return last;
     }
     
+    @SuppressWarnings("unchecked")
+    public void resize() {
+    	if(size < array.length-1) {
+    		return ;
+    	}
+    	T[] temp = (T[]) new Object[(array.length-1)*2];
+    	int nStart = start;
+    	for(int c = 0; c< size;c++) {
+    		temp[c] = array[nStart % array.length];
+    		nStart++;
+    	}
+    	array = temp;
+    	start = 0;
+    	end = size -1;
+    }
 }
-

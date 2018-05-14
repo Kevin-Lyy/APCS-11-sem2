@@ -51,7 +51,7 @@ public class Recursion{
 
     //1.1c Square Root
 
-    public double sqrt(double n){
+    public static double sqrt(double n){
 	if (n <= 0){
 	    throw new IllegalArgumentException();
 	}
@@ -62,7 +62,7 @@ public class Recursion{
 
 
     }
-    public double sqrthelp(double n, double g){
+    public static double sqrthelp(double n, double g){
 	if ((g*g) - n < 0.0000001){
 	    return g;
 	}
@@ -72,7 +72,6 @@ public class Recursion{
 
     public static void main(String[] args){
 	System.out.println("done");
-
     }
 
 
