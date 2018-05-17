@@ -1,4 +1,4 @@
-oimport java.util.*;
+import java.util.*;
 
 public class Calculator{
 
@@ -20,7 +20,7 @@ public class Calculator{
 	    return n1+n2;
 	}
 	if(op.equals("-")){
-	    return n2 - n1;
+	    return n1 - n2;
 	}
 	if(op.equals("/")){
 	    return n1/n2;
