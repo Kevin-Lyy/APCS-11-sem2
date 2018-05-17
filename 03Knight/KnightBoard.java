@@ -1,22 +1,22 @@
 public class KnightBoard{
-    
+
     public int[][] board;
-    public static int[][] addKnight = {{2,1},{2,-1},{1,2},{1,-2},{-2,1},{-2,-1},{-1,2},{-1,-2}};
+    public static int[][] addKnight = {{2,1},{2,-1},{1,2},{1,-2},{-1,2},{-1,-2},{-2,1},{-2,-1}};
     public int rows;
     public int cols;
-    
+
     public KnightBoard(int startingRows, int startingCols){
 	if(startingRows < 0 || startingCols < 0){
 	    throw new IllegalArgumentException();
 	}
-	
+
 	board= new int[startingRows][startingCols];
 	rows = startingRows;
 	cols = startingCols;
     }
 
     public String toString(){
-    	
+
 	String StringBoard = "\n";
 	for(int x = 0; x < board.length ;x++){
 	    for(int y = 0; y < board[x].length; y++){
@@ -26,7 +26,7 @@ public class KnightBoard{
 	    	else if(board[x][y] < 10) {
 	    		StringBoard += " " + board[x][y] + " ";
 			}
-	    	else { 
+	    	else {
 	    		StringBoard += board[x][y] + " ";
 	    	}
 	    }
@@ -39,7 +39,7 @@ public class KnightBoard{
     public boolean solve(int startingRow, int startingCol){
 	if(startingRow < 0 || startingCol < 0)throw new IllegalArgumentException();
 	if(startingRow > board.length || startingCol > board[0].length)throw new IllegalArgumentException();
-	
+
 	for(int[] x: board){
 	    for(int y:x){
 		if(y!=0) throw new IllegalStateException();
@@ -65,8 +65,8 @@ public class KnightBoard{
 		board[row][col] = 0;
 	    }
 	}
-	
-	return false;		   		
+
+	return false;
     }
 
     public int countSolutions(int startingRow, int startingCol){
@@ -94,8 +94,8 @@ public class KnightBoard{
 		board[row][col] = 0;
 	    }
 	}
-	return solutions;		   		
+	return solutions;
     }
-    
-  
+
+
 }

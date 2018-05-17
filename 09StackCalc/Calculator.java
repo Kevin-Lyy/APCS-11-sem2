@@ -1,7 +1,7 @@
-import java.util.*;
+oimport java.util.*;
 
 public class Calculator{
-    
+
     public static double eval(String s){
 	Stack sta = new Stack();
 	String[] splitS = s.split(" ");
@@ -11,7 +11,7 @@ public class Calculator{
 	    }
 	    else{
 		sta.push(evalHelp(sta.pop(),sta.pop(),splitS[c]));
-	    }		
+	    }
 	}
 	return sta.pop();
     }
@@ -33,10 +33,10 @@ public class Calculator{
 	}
 	return 0;
     }
-    
+
     private static class Stack{
 	private LinkedList<Double> l = new LinkedList<>();
-	
+
 	public double pop(){
 	    double newL = l.getLast();
 	    l.removeLast();
@@ -54,9 +54,7 @@ public class Calculator{
 	System.out.println(Calculator.eval("10 2.0 +"));
 	System.out.println(Calculator.eval("11 3 - 4 + 2.5 *"));
 	System.out.println(Calculator.eval("8 2 + 99 9 - * 2 + 9 -"));
-	
-    }		   
-			       
+
+    }
+
 }
-
-

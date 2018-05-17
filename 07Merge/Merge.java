@@ -1,59 +1,52 @@
 import java.util.*;
 public class  Merge{
 
-    private static void merge(int[] data, int[] temp,int lo,int hi){
-	int mid = (lo + hi)/2 + 1;
-	int start = lo;
-	int midpoint = mid;
+  private static void merge(int[] data, int[] temp,int lo,int end1, int start2, int hi){
 	int tStart = lo;
-
-	while(start < mid && midpoint <= hi && lo <= hi){
-	    if(temp[start] < temp[midpoint]){
-		data[tStart] = temp[start];
-		start++;
-		tStart++;
+	while(lo < end1 && start2 <= hi){
+	    if(temp[lo] < temp[start2]){
+		      data[tStart] = temp[lo];
+          lo++;
 	    }
 	    else{
-		data[tStart] = temp[midpoint];
-		midpoint++;
-		tStart++;
+		      data[tStart] = temp[start2];
+          start2++;
 	    }
+        tStart++;
 	}
-	while(start < mid && tStart <= hi){
-	    data[tStart] = temp[start];
-	    start++;
+	while(lo <= end1){
+	    data[tStart] = temp[lo];
+	    lo++;
 	    tStart++;
 	}
-	while(midpoint < hi && tStart <= hi){
-	    data[tStart] = temp[midpoint];
-	    midpoint++;
+	while(start2 <= hi){
+	    data[tStart] = temp[start2];
+	    start2++;
 	    tStart++;
 	}
 
     }
 
 
-    public static void mergeSort(int[] data){
-	int[] temp = new int[data.length];
-	msort(data,temp,0,data.length-1);
-
+  public static void mergeSort(int[] data){
+	   int[] temp = new int[data.length];
+	    msort(data,temp,0,data.length-1);
     }
 
-    public static void msort(int[] data, int[] temp, int lo, int hi){
-	if(lo >= hi){
-	    return ;
-	}
-	for(int c = lo; c < hi; c++){
-	    temp[c] = data[c];
-	}
+  public static void msort(int[] data, int[] temp, int lo, int hi){
+    if(lo >= hi){
+      return ;
+    }
+    for(int c = lo; c <= hi; c++){
+      temp[c] = data[c];
+    }
+
 	int mid = (lo+hi)/2;
-
 	msort(temp,data,lo,mid);
 	msort(temp,data,mid+1,hi);
-	merge(data,temp,lo,hi);
+	merge(data,temp,lo,mid,mid+1,hi);
 
 
     }
-   
-}
 
+}
