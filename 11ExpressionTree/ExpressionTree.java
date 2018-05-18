@@ -1,67 +1,67 @@
 public class ExpressionTree{
 
-    public String toString(){
-	if(isValue()){
-	    return "" + getValue();
-	}
-	else if(isOp()){
-	    return "(" + getLeft().toString() + getOp() + getRight().toString() + ")";
-	}
-	return "";
+  public String toString(){
+    if(isValue()){
+      return "" + getValue();
     }
-
-    public String toStringPostfix(){
-	if(isValue()){
-	    return "" + getValue();
-	}
-	else if(isOp()){
-	    return getLeft().toStringPostfix()+ " " + getRight().toStringPostfix()+ " " + getOp();
-	}
-	return "";
+    else if(isOp()){
+      return "(" + getLeft().toString() + getOp() + getRight().toString() + ")";
     }
+    return "";
+  }
 
-    public String toStringPrefix(){
-	if(isValue()){
-	    return "" + getValue();
-	}
-	else if(isOp()){
-	    return getOp()+ " " + getLeft().toStringPrefix()+ " " + getRight().toStringPrefix();
-	}
-	return "";
+  public String toStringPostfix(){
+    if(isValue()){
+      return "" + getValue();
     }
-
-    public double evaluate(){
-	if(isValue()){
-	    return getValue();
-	}
-	else if(isOp()){
-	    return apply(getOp(),getLeft().evaluate(),getRight().evaluate());
-	}
-	return 0.0;
-	
+    else if(isOp()){
+      return getLeft().toStringPostfix()+ " " + getRight().toStringPostfix()+ " " + getOp();
     }
+    return "";
+  }
 
-    private double apply(char op, double a, double b){
-	if(op == '+'){
-	    return a + b;
-	}
-	if(op == '-'){
-	    return a - b;
-	}
-	if(op == '*'){
-	    return a * b;
-	}
-	if(op == '/'){
-	    return a / b;
-	}
-	return 0.0;
+  public String toStringPrefix(){
+    if(isValue()){
+      return "" + getValue();
     }
+    else if(isOp()){
+      return getOp()+ " " + getLeft().toStringPrefix()+ " " + getRight().toStringPrefix();
+    }
+    return "";
+  }
 
-    ///////////////////////////////////
+  public double evaluate(){
+    if(isValue()){
+      return getValue();
+    }
+    else if(isOp()){
+      return apply(getOp(),getLeft().evaluate(),getRight().evaluate());
+    }
+    return 0.0;
+
+  }
+
+  private double apply(char op, double a, double b){
+    if(op == '+'){
+      return a + b;
+    }
+    if(op == '-'){
+      return a - b;
+    }
+    if(op == '*'){
+      return a * b;
+    }
+    if(op == '/'){
+      return a / b;
+    }
+    return 0.0;
+  }
+
+  ///////////////////////////////////
   private char op;
   private double value;
   private ExpressionTree left,right;
-  
+
   /*TreeNodes are immutable, so no issues with linking them across multiple
   *  expressions. The can be constructed with a value, or operator and 2
   * sub-ExpressionTrees*/
@@ -74,11 +74,11 @@ public class ExpressionTree{
     left = l;
     right = r;
   }
-  
+
   public char getOp(){
     return op;
   }
-  
+
   /* accessor method for Value, precondition is that isValue() is true.*/
   private double getValue(){
     return value;
@@ -91,21 +91,21 @@ public class ExpressionTree{
   private ExpressionTree getRight(){
     return right;
   }
-  
+
   private boolean isOp(){
     return hasChildren();
   }
   private boolean isValue(){
     return !hasChildren();
   }
-  
+
   private boolean hasChildren(){
     return left != null && right != null;
   }
-  
-  
+
+
   public static void main(String[] args){
-      ExpressionTree a = new ExpressionTree(4.0);
+    ExpressionTree a = new ExpressionTree(4.0);
     ExpressionTree b = new ExpressionTree(2.0);
 
     ExpressionTree c = new ExpressionTree('+',a,b);
@@ -136,7 +136,7 @@ public class ExpressionTree{
     System.out.println(ex);
     System.out.println(ex.toStringPostfix());
     System.out.println(ex.toStringPrefix());
-    System.out.println(ex.evaluate());//10.5   
+    System.out.println(ex.evaluate());//10.5
   }
-    
+
 }

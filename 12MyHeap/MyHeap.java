@@ -4,12 +4,12 @@ public class MyHeap<T extends Comparable<T>>{
 	private T[] heap;
 	private int size;
 	private boolean minOrMax;
-	
+
 	//empty max heap (use string first)
 	@SuppressWarnings("unchecked")
 	public MyHeap(){
 		minOrMax = true;
-		heap = (T[])new Comparable[10];	
+		heap = (T[])new Comparable[10];
 	}
 	//max or min
 	@SuppressWarnings("unchecked")
@@ -23,7 +23,7 @@ public class MyHeap<T extends Comparable<T>>{
 			heap = (T[])new Comparable[10];
 		}
 	}
-	//methods 
+	//methods
 	public void swap(int a,int b, T[] ary){
 		T temp = heap[a];
 		heap[a] = heap[b];
@@ -39,7 +39,7 @@ public class MyHeap<T extends Comparable<T>>{
 			pushUpMax(heapSingle,parent);
 		}
 	}
-	
+
 	public void pushUpMin(T[] heapSingle, int index){
 		int parent = (index -1)/2;
 		if(index == 0) {
@@ -50,26 +50,26 @@ public class MyHeap<T extends Comparable<T>>{
 			pushUpMin(heapSingle,parent);
 		}
 	}
-	
+
 	public void add(T s) {
 		heap[size-1] = s;
 		size++;
 		if(minOrMax){
 			pushUpMax(heap,size-1);
-			}
+		}
 		else if(!minOrMax) pushUpMin(heap,size-1);
 	}
 	//add while loop if the children are out of bounds stop
 	public T remove() {
 		T first = heap[0];
 		int tempIndex = 0;
-		
+
 		if(minOrMax){
 			while(tempIndex*2 + 1 < size) {
 				int tempChild1 = tempIndex * 2 + 1;
 				int tempChild2 = tempIndex * 2 + 2;
-				
-				if(heap[tempChild1].compareTo(heap[tempChild2]) > 0){ 
+
+				if(heap[tempChild1].compareTo(heap[tempChild2]) > 0){
 					swap(tempIndex,tempChild1,heap);
 					tempIndex = tempChild1;
 				}
@@ -84,7 +84,7 @@ public class MyHeap<T extends Comparable<T>>{
 			while(tempIndex*2 + 1 < size) {
 				int tempChild1 = tempIndex * 2 + 1;
 				int tempChild2 = tempIndex * 2 + 2;
-				if(heap[tempChild1].compareTo(heap[tempChild2]) < 0){ 
+				if(heap[tempChild1].compareTo(heap[tempChild2]) < 0){
 					swap(tempIndex,tempChild1,heap);
 					tempIndex = tempChild1;
 				}
@@ -98,11 +98,11 @@ public class MyHeap<T extends Comparable<T>>{
 		return first;
 	}
 
-            
+
 	public T peek() {
 		return heap[0];
 	}
-	
+
 	public int size() {
 		return size;
 	}
