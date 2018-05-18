@@ -1,7 +1,7 @@
 public class Recursion{
 
 
-    //1.1a factorial 
+    //1.1a factorial
     public int fact(int n){
 	if (n < 0){
 	    throw new IllegalArgumentException();
@@ -26,7 +26,7 @@ public class Recursion{
 	}
 	return fibhelp(1,1,2,n);
     }
-    
+
     public int fibhelp(int bsum, int sum, int count, int n){
 	if (count == n){
 	    return sum;
@@ -34,7 +34,7 @@ public class Recursion{
 	return fibhelp(sum, bsum+sum, count + 1, n);
     }
 
-    
+    /*
     public int fib2(int n){
 	if (n < 0){
 	    throw new IllegalArgumentException();
@@ -47,7 +47,7 @@ public class Recursion{
 	}
 	return fib2(n-1) + fib(n-2);
     }
- 
+ */
 
     //1.1c Square Root
 
@@ -59,15 +59,13 @@ public class Recursion{
 	    return 0;
 	}
 	return sqrthelp(n,n/2);
-
-
     }
+
     public static double sqrthelp(double n, double g){
-	if ((g*g) - n < 0.0000001){
+	if (Math.abs(g*g - n) < 0.0000001){
 	    return g;
 	}
 	return sqrthelp(n ,(n/ g + g)/2);
-
     }
 
     public static void main(String[] args){
@@ -76,5 +74,3 @@ public class Recursion{
 
 
 }
-
-	
