@@ -42,7 +42,7 @@ public class Quick{
 	if(start < end){
 	    int[] pivot = dutchPartition(ary,start,end);
 	    quickSortHelp(ary,start,pivot[0]-1);
-	    quickSortHelp(ary,pivot[1],end);
+	    quickSortHelp(ary,pivot[1]+1,end);
 	}
     }
 
@@ -50,7 +50,11 @@ public class Quick{
     int temp = data[x];
     data[x] = data[y];
     data[y] = temp;
-      }
+  }
+
+
+
+
 }
 
 /*

@@ -33,12 +33,12 @@ public class Maze{
     public Maze(String filename) throws FileNotFoundException{
             //COMPLETE CONSTRUCTOR
           	File text = new File(filename);
-          	Scanner inf = new Scanner(text);
+          	Scanner fileM = new Scanner(text);
           	int rows=0;
           	int cols=0;
-          	while(inf.hasNextLine()){
+          	while(fileM.hasNextLine()){
           		rows+=1;
-          		String line = inf.nextLine();
+          		String line = fileM.nextLine();
           		cols=line.length();
           	}
           	Scanner read = new Scanner(text);
@@ -86,15 +86,15 @@ public class Maze{
     }
 
 
-    public String toString(){
-    	String ans="";
-    	for (int r=0;r<maze.length;r++){
-    		for (int c=0;c<maze[0].length;c++){
-    			ans+=maze[r][c];
-    		}
-    		ans+="\n";
-    	}
-    	return ans;
+  public String toString(){
+      String str = "";
+      for(int r = 0; r <maze.length;r++){
+        for(int c = 0; c < maze[0].length; c++){
+          str += maze[r][c];
+        }
+        str += "\n";
+      }
+      return str;
     }
 
 
