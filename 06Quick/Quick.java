@@ -10,7 +10,7 @@ public class Quick{
     while (i <= gt){
       if(data[i] == pivot){
         i++;
-      }
+      } 
       else{
         if(data[i] < pivot){
           swap(data,lt,i);

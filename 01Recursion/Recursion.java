@@ -52,7 +52,7 @@ return fib2(n-1) + fib(n-2);
 //1.1c Square Root
 
 public static double sqrt(double n){
-  if (n <= 0){
+  if (n < 0){
     throw new IllegalArgumentException();
   }
   if (n == 0){
