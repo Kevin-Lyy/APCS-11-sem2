@@ -114,35 +114,31 @@ public class Maze{
 	   if(animate){
 	    clearTerminal();
 	    System.out.println(this);
-
       wait(20);
 	}
-	    if(maze[row][col] == 'E')return level;
 
-	    for(int[] move:movement){
-        int rown = row + move[0];
-	       int coln = col + move[1];
-	        char loc = maze[rown][coln];
-	    if(loc == ' ' || loc == 'E'){
-		      maze[row][col] = '@';
-		       int solv = solveHelp(rown, coln, level + 1);
-		       if(solv == -1) maze[rown][coln] = '.';
-	         else return solv;
-	    }
-	}
-	return -1;
+  if (maze[row][col] == 'E') return level;
+
+  for (int x = 0; x < movement.length; x++) {
+
+    int tempRow = row + movement[x][1];
+    int temoCol = col + movement[x][0];
+
+    maze[row][col] = '@';
+
+    if (maze[tempRow][temoCol] == ' ' || maze[tempRow][temoCol] == 'E'){
+  int ans = solveHelp(tempRow, temoCol, level + 1);
+  if (ans != -1){
+      return ans;
+  }
     }
-    public static void main(String[] args){
-     try{
-       Maze a = new Maze("data1.dat");
-       a.setAnimate(false);
-       System.out.println(a);
-       System.out.println(a.solve());
-       System.out.println(a);
-     }
-     catch(FileNotFoundException e){
-       System.out.println("Error");
-     }
-   }
+
+    maze[row][col] = '.';
+}
+
+return -1;
+    }
+
+    
 
 }

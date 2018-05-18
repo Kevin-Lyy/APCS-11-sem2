@@ -96,6 +96,6 @@ public class KnightBoard{
 	}
 	return solutions;
     }
-
+  
 
 }
