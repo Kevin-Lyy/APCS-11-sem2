@@ -10,7 +10,7 @@ public class Quick{
     while (i <= gt){
       if(data[i] == pivot){
         i++;
-      } 
+      }
       else{
         if(data[i] < pivot){
           swap(data,lt,i);
@@ -28,13 +28,13 @@ public class Quick{
   }
 
 
-  public static int quickSelect(int[]ary,int k){
+  public static int quickselect(int[]ary,int k){
     quickSort(ary);
     return ary[k];
   }
 
 
-  public static void quickSort(int[]ary){
+  public static void quicksort(int[]ary){
     quickSortHelp(ary,0,ary.length-1);
   }
 
