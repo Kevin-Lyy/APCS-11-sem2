@@ -5,6 +5,7 @@ public class RunningMedian{
 	MyHeap<Double> lrg;
 	MyHeap<Double> sml;
 	public int size;
+
 	@SuppressWarnings("unchecked")
 	public RunningMedian(){
 		lrg = new MyHeap(false);

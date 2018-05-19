@@ -1,32 +1,36 @@
+import java.util.*;
+
 public class MyHeap<T extends Comparable<T>>{
 	private T[] heap;
-	public int size;
-	private boolean minOrMax;
-	
+	private int size;
+	private boolean trueMax;
+
 	//empty max heap (use string first)
 	@SuppressWarnings("unchecked")
 	public MyHeap(){
-		minOrMax = true;
-		heap = (T[])new Comparable[10];	
+		trueMax = true;
+		heap = (T[])new Comparable[10];
 	}
+
 	//max or min
 	@SuppressWarnings("unchecked")
 	public MyHeap(boolean max) {
 		if (!max) {
-			minOrMax = false;
+			trueMax = false;
 			heap = (T[])new Comparable[10];
 		}
 		else {
-			minOrMax = true;
+			trueMax = true;
 			heap = (T[])new Comparable[10];
 		}
 	}
-	//methods 
+	//methods
 	public void swap(int a,int b, T[] ary){
 		T temp = heap[a];
 		heap[a] = heap[b];
 		heap[b] = temp;
 	}
+
 	public void pushUpMax(T[] heapSingle, int index) {
 		int parent = (index -1)/2;
 		if(index == 0) {
@@ -37,7 +41,7 @@ public class MyHeap<T extends Comparable<T>>{
 			pushUpMax(heapSingle,parent);
 		}
 	}
-	
+
 	public void pushUpMin(T[] heapSingle, int index){
 		int parent = (index -1)/2;
 		if(index == 0) {
@@ -48,60 +52,84 @@ public class MyHeap<T extends Comparable<T>>{
 			pushUpMin(heapSingle,parent);
 		}
 	}
-	
+
 	public void add(T s) {
-		heap[size-1] = s;
+		resize();
+		heap[size] = s;
 		size++;
-		if(minOrMax){
-			pushUpMax(heap,size-1);
-			}
-		else if(!minOrMax) pushUpMin(heap,size-1);
-	}
-	//add while loop if the children are out of bounds stop
-	public T remove() {
-		T first = heap[0];
-		int tempIndex = 0;
-		
-		if(minOrMax){
-			while(tempIndex*2 + 1 < size) {
-				int tempChild1 = tempIndex * 2 + 1;
-				int tempChild2 = tempIndex * 2 + 2;
-				
-				if(heap[tempChild1].compareTo(heap[tempChild2]) > 0){ 
-					swap(tempIndex,tempChild1,heap);
-					tempIndex = tempChild1;
-				}
-				else {
-					swap(tempIndex,tempChild2,heap);
-					tempIndex = tempChild2;
-				}
-			}
-			heap[tempIndex] = null;
+		if(trueMax){
+			pushUpMax(heap,size);
 		}
-		if(!minOrMax) {
-			while(tempIndex*2 + 1 < size) {
-				int tempChild1 = tempIndex * 2 + 1;
-				int tempChild2 = tempIndex * 2 + 2;
-				if(heap[tempChild1].compareTo(heap[tempChild2]) < 0){ 
-					swap(tempIndex,tempChild1,heap);
-					tempIndex = tempChild1;
-				}
-				else {
-					swap(tempIndex,tempChild2,heap);
-					tempIndex = tempChild2;
-				}
-			}
-			heap[tempIndex] = null;
-		}
-		return first;
+		else if(!trueMax) pushUpMin(heap,size);
 	}
 
-            
+	public void pushDownMax(int index){
+			int tempChild1 = index * 2 + 1;
+			int tempChild2 = index * 2 + 2;
+
+			if(heap[tempChild1].compareTo(heap[tempChild2]) > 0){
+				swap(index,tempChild1,heap);
+				pushDownMax(tempChild1);
+			}
+			else {
+				swap(index,tempChild2,heap);
+				pushDownMax(tempChild2);
+			}
+		heap[index] = null;
+	}
+
+	public void pushDownMin(int index){
+			int tempChild1 = index * 2 + 1;
+			int tempChild2 = index * 2 + 2;
+			if(heap[tempChild1].compareTo(heap[tempChild2]) < 0){
+				swap(index,tempChild1,heap);
+				pushDownMin(tempChild1);
+			}
+			else {
+				swap(index,tempChild2,heap);
+				pushDownMin(tempChild2);
+			}
+		heap[index] = null;
+	}
+
+	public T remove() {
+		T first = peek();
+		swap(0,size - 1,heap);
+		size--;
+		if(trueMax){
+			pushDownMax(0);
+		}
+		else if (!trueMax){
+			pushDownMin(0);
+		}
+		return first;
+}
+
+	@SuppressWarnings("unchecked")
+	public void resize(){
+		T[] temp = (T[])new Comparable[heap.length * 2];
+		for(int c = 0; c < size(); c++){
+			temp[c] = heap[c];
+		}
+		heap = temp;
+	}
+
 	public T peek() {
 		return heap[0];
 	}
-	
+
 	public int size() {
 		return size;
 	}
+
+	public String toString(){
+		String str = "[";
+		for(int c = 0; c < size(); c++){
+			str += heap[c] + ", ";
+		}
+		str += "]";
+		return str;
+	}
+
+
 }
