@@ -13,7 +13,7 @@ public class Sorts<T extends Comparable<T>>{
 	}
 
 	public static void main(String[] args) {
-		Integer[] word= {10,9,8,7,6,5};
+		Integer[] word= {10,9,8,7,6,5,12,4,15,2,8,5};
 		heapSort(word);
 	}
 }
