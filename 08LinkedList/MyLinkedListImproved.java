@@ -1,7 +1,7 @@
 import java.util.Iterator;
 import java.util.*;
 
-public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T>{
+public class MyLinkedListImproved <T extends Comparable<T>> implements Iterable<T>{
   public Node start,end;
   public int size;
 
@@ -12,6 +12,12 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     public Node(T value){
       data = value;
     }
+    public Node(Node n, Node p, T val){
+      next = n;
+      prev = p;
+      data = val;
+    }
+
     public Node getNext(){
       return next;
     }
@@ -34,6 +40,11 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
       return data +"";
     }
   }
+  public MyLinkedListImproved(){
+   start = null;
+   end = null;
+   size = 0;
+     }
 
 
   //returns node at given index
@@ -77,30 +88,32 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 
   //adds value at index
   public void add(int index, T value){
-    Node newNode = new Node(value);
-    Node Nindex = start;
-    if(index >= size || index < 0){
+    if(index > size() || index < 0){
       throw new IndexOutOfBoundsException();
     }
-    if(index == 0){
-      start.setPrev(newNode);
-      newNode.setNext(start);
-      start = newNode;
-      size++;
-    }
-    else if(index == size){
+    if(index == size()){
       add(value);
+      return ;
     }
-    else{
-      for(int c = 0; c < index;c++){
-        Nindex = Nindex.getNext();
-      }
-      newNode.setNext(Nindex);
-      Nindex.getPrev().setNext(newNode);
-      newNode.setPrev(Nindex.getPrev());
-      Nindex.setPrev(newNode);
+    if(index == 0){
+      Node nodeN = new Node(null, null, value);
+      start.setPrev(nodeN);
+      nodeN.setNext(start);
+      start = nodeN;
       size++;
+      return ;
     }
+    Node nodeN = new Node(null, null, value);
+    Node temp = start;
+    for(int c = 0; c < index -1;c++){
+      temp = temp.getNext();
+    }
+    Node te = temp.getNext();
+    temp.setNext(nodeN);
+    nodeN.setPrev(temp);
+    te.setPrev(nodeN);
+    nodeN.setNext(te);
+    size++;
   }
 
   public int indexOf(T value){
@@ -117,8 +130,6 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
   }
 
   public String toString(){
-    if(size == 0) return "[]";
-
     String str = "[";
     Node index = start;
     while(index != null){
@@ -134,7 +145,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 
   //returns value of index
   public T get(int index){
-    if(index >= size || index < 0){
+    if(index >= size() || index < 0){
       throw new IndexOutOfBoundsException();
     }
     Node value = start;
@@ -150,7 +161,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
       throw new IndexOutOfBoundsException();
     }
     Node value = start;
-    for(int c = 0; c < index; c++){
+    for(int c = 0; c <= index; c++){
       value = value.getNext();
     }
     T ans = value.getValue();
@@ -158,141 +169,147 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     return ans;
   }
 
+  //removes start instance of value
   public boolean remove(T value){
     Node index = start;
-    while(index != null){
-      if(index.getValue().equals(value)){
-        if(index.equals(start)){
-          start = index.getNext();
-        }
-        else if(index.equals(end)){
-          end = end.getPrev();
-          end.setNext(null);
-        }
-        else{
-          index.getNext().setPrev(index.getPrev());
-          index.getPrev().setNext(index.getNext());
-        }
-        size--;
-        return true;
-      }
+    while(index.getValue() != value){
       index = index.getNext();
     }
-    return false;
+    if(index == null)return false;
+
+    if(index.getPrev() == null){
+      index.getNext().setPrev(null);
+      start = index.getNext();
+      size--;
+      return true;
+    }
+    if(index.getNext() == null){
+      index.getPrev().setNext(null);
+      size--;
+      return true;
+    }
+    Node back = index.getPrev();
+    Node after = index.getNext();
+    back.setNext(after);
+    after.setPrev(back);
+    size--;
+    return true;
   }
-  
-  //removes value at index
-  public T remove(int index){
-    if(index >= size || index < 0){
-      throw new IndexOutOfBoundsException();
-    }
-    Node Nindex = start;
-    for(int c = 0;c < index;c++){
-      Nindex.getNext();
-    }
-    if (Nindex.getPrev() == null){
-      Nindex.getNext().setPrev(null);
-      start = Nindex.getNext();
-      size--;
-      return Nindex.getValue();
-    }
-    if (Nindex.getNext() == null){
-      Nindex.getPrev().setNext(null);
-      end = Nindex.getPrev();
-      size--;
-      return Nindex.getValue();
-    }
-    Node m = Nindex.getNext();
-    Node k = Nindex.getPrev();
-    Nindex.setPrev(k);
-    k.setNext(m);
+
+
+//removes value at index
+public T remove(int index){
+  if(index >= size() || index < 0){
+    throw new IndexOutOfBoundsException();
+  }
+  Node Nindex = start;
+  for(int c = 0;c < index;c++){
+    Nindex.getNext();
+  }
+  if (Nindex.getPrev() == null){
+    Nindex.getNext().setPrev(null);
+    start = Nindex.getNext();
     size--;
     return Nindex.getValue();
   }
-
-
-  public int max(){
-    if(size == 0){
-      return -1;
-    }
-    T tempMax = start.getValue();
-    for(T index:this){
-      if(tempMax.compareTo(index) > 0){
-        tempMax = index;
-      }
-    }
-    return indexOf(tempMax);
+  if (Nindex.getNext() == null){
+    Nindex.getPrev().setNext(null);
+    end = Nindex.getPrev();
+    size--;
+    return Nindex.getValue();
   }
+  Node m = Nindex.getNext();
+  Node k = Nindex.getPrev();
+  Nindex.setPrev(k);
+  k.setNext(m);
+  size--;
+  return Nindex.getValue();
+}
 
-  public int min(){
-    if(size == 0){
-      return -1;
-    }
-    T tempMin = start.getValue();
-    for(T index:this){
-      if(tempMin.compareTo(index) < 0){
-        tempMin = index;
-      }
-    }
-    return indexOf(tempMin);
+
+public int max(){
+  if(size() == 0){
+    return -1;
   }
-
-  //take out all of other list and move to linkedlist, attach to end
-  //other is now empty
-
-  public void extend(MyLinkedListImproved<T> other){
-    end.setNext(other.start);
-    other.start.setPrev(end);
-    end = other.end;
-    other.clear();
-  }
-
-  public class MyLLIterator implements Iterator<T>{
-    private Node next;
-
-    public MyLLIterator(Node start){
-      next = start;
-    }
-    public void remove(){
-      throw new UnsupportedOperationException();
-    }
-
-    public boolean hasNext(){
-      return next != null;
-    }
-
-    public T next(){
-      if (hasNext()){
-        T index = next.getValue();
-        next = next.getNext();
-        return index;
-      }
-      throw new NoSuchElementException();
+  T tempMax = start.getValue();
+  for(T index:this){
+    if(tempMax.compareTo(index) < 0){
+      tempMax = index;
     }
   }
+  return indexOf(tempMax);
+}
 
-  public Iterator<T> iterator(){
-    return new MyLLIterator(start);
+public int min(){
+  if(size() == 0){
+    return -1;
+  }
+  T tempMin = start.getValue();
+  for(T index:this){
+    if(tempMin.compareTo(index) > 0){
+      tempMin = index;
+    }
+  }
+  return indexOf(tempMin);
+}
+
+//take out all of other list and move to linkedlist, attach to end
+//other is now empty
+
+public void extend(MyLinkedListImproved<T> other){
+  end.setNext(other.start);
+  other.start.setPrev(end);
+  end = other.end;
+  other.clear();
+}
+
+
+public class MyLLIterator implements Iterator<T>{
+  private Node next;
+
+  public MyLLIterator(Node start){
+    next = start;
+  }
+  public void remove(){
+    throw new UnsupportedOperationException();
   }
 
-
-  public static void main(String[]args){
-    MyLinkedListImproved<String> n = new MyLinkedListImproved<>();
-    n.add("fish");
-    System.out.println(n);
-    MyLinkedListImproved<Integer> m = new MyLinkedListImproved<>();
-    for (int x = 1; x < 10; x++){
-      m.add(10 - x);
-    }
-    MyLinkedListImproved<Integer> r = new MyLinkedListImproved<>();
-    for (int x = 1; x < 10; x++){
-      r.add(x);
-    }
-    m.extend(r);
-    System.out.println(m.toString());
-    System.out.println(r.toString());
-    System.out.println(m.min());
-    System.out.println(m.max());
+  public boolean hasNext(){
+    return next != null;
   }
+
+  public T next(){
+    if (hasNext()){
+      T index = next.getValue();
+      next = next.getNext();
+      return index;
+    }
+    throw new NoSuchElementException();
+  }
+}
+
+public Iterator<T> iterator(){
+  return new MyLLIterator(start);
+}
+
+
+public static void main(String[]args){
+  MyLinkedListImproved<String> n = new MyLinkedListImproved<>();
+  n.add("fish");
+  System.out.println(n);
+  MyLinkedListImproved<Integer> m = new MyLinkedListImproved<>();
+  for (int x = 1; x < 10; x++){
+    m.add(10 - x);
+  }
+  MyLinkedListImproved<Integer> r = new MyLinkedListImproved<>();
+  for (int x = 1; x < 10; x++){
+    r.add(x);
+  }
+  m.extend(r);
+  System.out.println(m.toString());
+  System.out.println(r.toString());
+  System.out.println(m.min());
+  System.out.println(m.max());
+}
 
 }
