@@ -8,8 +8,9 @@ public class RunningMedian{
 
 	@SuppressWarnings("unchecked")
 	public RunningMedian(){
-		lrg = new MyHeap(false);
-		sml = new MyHeap();
+		lrg = new MyHeap<Double>(false);
+		sml = new MyHeap<Double>();
+		size = 0;
 	}
 
 	public int size() {
