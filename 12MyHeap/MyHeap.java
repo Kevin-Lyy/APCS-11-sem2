@@ -32,12 +32,12 @@ public class MyHeap<T extends Comparable<T>>{
 	}
 
 	public void pushUpMax(T[] heapSingle, int index) {
-		if((index-1)/2 > 0){
+		if((index-1)/2 >= 0){
 			int parent = (index -1)/2;
 			if(index == 0) {
 				return ;
 			}
-			if(heapSingle[index].compareTo(heapSingle[parent]) > 0) {
+			else if(heapSingle[index].compareTo(heapSingle[parent]) > 0) {
 				swap(index,parent,heapSingle);
 				pushUpMax(heapSingle,parent);
 			}
@@ -45,12 +45,12 @@ public class MyHeap<T extends Comparable<T>>{
 	}
 
 	public void pushUpMin(T[] heapSingle, int index){
-		if((index-1)/2 > 0){
+		if((index-1)/2 >= 0){
 			int parent = (index -1)/2;
 			if(index == 0) {
 				return ;
 			}
-			if(heapSingle[index].compareTo(heapSingle[parent]) < 0) {
+			else if(heapSingle[index].compareTo(heapSingle[parent]) < 0) {
 				swap(index,parent,heapSingle);
 				pushUpMin(heapSingle,parent);
 			}
@@ -58,52 +58,57 @@ public class MyHeap<T extends Comparable<T>>{
 	}
 
 	public void add(T s) {
-		resize();
-		heap[size] = s;
-		size++;
-		if(trueMax){
-			pushUpMax(heap,size);
+		if(size() == heap.length -1) resize();
+		if(size() == 0)heap[0] = s;
+		else{
+			heap[size()] = s;
+			if(trueMax){
+				pushUpMax(heap,size);
+			}
+			else{ pushUpMin(heap,size);
+			}
 		}
-		else if(!trueMax) pushUpMin(heap,size);
+		size++;
 	}
 
 	public void pushDownMax(int index){
 		int tempChild1 = index * 2 + 1;
 		int tempChild2 = index * 2 + 2;
-
-		if(heap[tempChild1].compareTo(heap[tempChild2]) > 0){
-			swap(index,tempChild1,heap);
-			pushDownMax(tempChild1);
+		if(tempChild1 < size() && tempChild2 < size()){
+			if(heap[tempChild1].compareTo(heap[tempChild2]) > 0){
+				swap(index,tempChild1,heap);
+				pushDownMax(tempChild1);
+			}
+			else {
+				swap(index,tempChild2,heap);
+				pushDownMax(tempChild2);
+			}
 		}
-		else {
-			swap(index,tempChild2,heap);
-			pushDownMax(tempChild2);
-		}
-		heap[index] = null;
 	}
 
-	public void pushDownMin(int index){
-		int tempChild1 = index * 2 + 1;
-		int tempChild2 = index * 2 + 2;
-		if(heap[tempChild1].compareTo(heap[tempChild2]) < 0){
-			swap(index,tempChild1,heap);
-			pushDownMin(tempChild1);
-		}
-		else {
-			swap(index,tempChild2,heap);
-			pushDownMin(tempChild2);
-		}
-		heap[index] = null;
+	public void pushDownMin2(int index){
+		int tempChild1 = (index * 2) + 1;
+		int tempChild2 = (index * 2) + 2;
+
+		if(tempChild1 < size() && heap[index].compareTo(heap[tempChild1]) > 0
+		&& (tempChild2 >= size() || heap[tempChild2].compareTo(heap[tempChild1]) >= 0)) {
+				swap(index,tempChild1,heap);
+				pushDownMin(tempChild1);
+			}
+			else if(tempChild2 < size() && heap[index].compareTo(heap[tempChild2]) > 0 &&
+			(tempChild1 >= size() || heap[tempChild1].compareTo(heap[tempChild2]) >= 0)) {
+				swap(index,tempChild2,heap);
+				pushDownMin(tempChild2);
+			}
 	}
+
 
 	public T remove() {
 		T first = peek();
 		swap(0,size - 1,heap);
 		size--;
-		if(trueMax){
-			pushDownMax(0);
-		}
-		else if (!trueMax){
+		if(trueMax) pushDownMax(0);
+		else {
 			pushDownMin(0);
 		}
 		return first;
