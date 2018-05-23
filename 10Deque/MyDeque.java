@@ -38,12 +38,9 @@ public class MyDeque<T>{
       return ;
     }
     resize();
-    if(start == 0){
-      start = array.length-1;
-    }
-    else{
-      start--;
-    }
+    if(start == 0) start = array.length-1;
+    else start--;
+
     array[start] = value;
     size++;
   }
@@ -58,12 +55,9 @@ public class MyDeque<T>{
       return ;
     }
     resize();
-    if(end == array.length-1){
-      end = 0;
-    }
-    else{
-      end++;
-    }
+    if(end == array.length-1) end = 0;
+    else end++;
+
     array[end] = value;
     size++;
   }
@@ -75,12 +69,9 @@ public class MyDeque<T>{
     T first = array[start];
     array[start] = null;
     size--;
-    if(start == array.length-1){
-      start = 0;
-    }
-    else{
-      start++;
-    }
+    if(start == array.length-1) start = 0;
+    else start++;
+
     return first;
   }
 
@@ -91,12 +82,9 @@ public class MyDeque<T>{
     T last = array[end];
     array[end] = null;
     size--;
-    if(end == 0){
-      end = array.length-1;
-    }
-    else{
-      end--;
-    }
+    if(end == 0)end = array.length-1;
+    else end--;
+
     return last;
   }
 
@@ -144,7 +132,4 @@ public class MyDeque<T>{
   	ans = ans.substring(0, ans.length() - 2) + "]";
   	return ans;
       }
-
-
-
   }
