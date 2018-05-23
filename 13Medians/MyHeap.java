@@ -86,7 +86,7 @@ public class MyHeap<T extends Comparable<T>>{
 		}
 	}
 
-	public void pushDownMin2(int index){
+	public void pushDownMin(int index){
 		int tempChild1 = (index * 2) + 1;
 		int tempChild2 = (index * 2) + 2;
 

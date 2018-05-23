@@ -1,12 +1,11 @@
 import java.util.*;
-public class RunningMedian{
+public class RunningMedian extends MyHeap{
 
 	private double currentMedian;
 	MyHeap<Double> lrg;
 	MyHeap<Double> sml;
 	public int size;
 
-	@SuppressWarnings("unchecked")
 	public RunningMedian(){
 		lrg = new MyHeap<Double>(false);
 		sml = new MyHeap<Double>();
@@ -18,9 +17,8 @@ public class RunningMedian{
 	}
 
 	public void add(Double x) {
-		if( lrg.size() == 0 && sml.size() == 0) sml.add(x);
-		if(x > currentMedian) lrg.add(x);
-		if(x < currentMedian) sml.add(x);
+		if(size() == 0 || x > sml.peek() == 0) lrg.add(x);
+		else sml.add(x);
 
 		if(lrg.size() > sml.size())currentMedian = lrg.peek();
 		else if(lrg.size() > sml.size()+1) sml.add(lrg.remove());
