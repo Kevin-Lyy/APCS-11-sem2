@@ -2,19 +2,13 @@ import java.io.*;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class Location{
-    private int x,y;
-    private Location previous;
-
-    public Location(int _x, int _y, Location prev){
-    }
-}
 public class Maze{
   private static final String CLEAR_SCREEN =  "\033[2J";
   private static final String HIDE_CURSOR =  "\033[?25l";
   private static final String SHOW_CURSOR =  "\033[?25h";
   Location start,end;
   private char[][]maze;
+  public boolean AStar = false;
 
 
   /*
@@ -22,12 +16,36 @@ public class Maze{
   YOU MUST COMPLETE THIS METHOD!!!
   YOU MUST COMPLETE THIS METHOD!!!
   */
+
   public Location[] getNeighbors(Location L){
-    //return null;
-	if(L.getRow > 0 && L.getCol > 0 && L.getRow < L.length() && L.getCol < L[0].length()) {
-		return (maze[L.getRow+1][L.getCol],maze[L.getRow-1][L.getCol],maze[L.getRow][L.getCol+1],maze[L.getRow][L.getCol-1]);
-	}
-	if(L.)
+    int x = L.getX();
+    int y = L.getY();
+    int endX = end.getX();
+    int endY = end.getY();
+    maze[x][y] = '.';
+    Location[] neighbors = new Location[4];
+    int right = x+1;
+    int left = x-1;
+    int up = y+1;
+    int down = y-1;
+    if(maze[right][y] == ' ' || maze[right][y] == 'E'){
+      array[0] = new Location(right,y,L,Math.abs(right-endX)+Math.abs(y-endY),AStar);
+      maze[right][y] = '?';
+    }
+    if(maze[left][y] == ' ' || maze[left][y] == 'E'){
+      array[1] = new Location(left,y,L,Math.abs(left-endX)+Math.abs(y-endY),AStar);
+      maze[left][y] = '?';
+    }
+    if(maze[x][up] == ' ' || maze[x][up] == 'E'){
+      array[2] = new Location(up,y,L,Math.abs(x-endX)+Math.abs(up-endY),AStar);
+      maze[x][up] = '?';
+    }
+    if(maze[x][down] == ' ' || maze[x][down] == 'E'){
+      array[3] = new Location(down,y,L,Math.abs(x-endX)+Math.abs(down-endY),AStar);
+      maze[x][down] = '?';
+    }
+
+
   }
 
   public Location getStart(){
@@ -48,7 +66,7 @@ public class Maze{
   public void clearTerminal(){
     System.out.println(CLEAR_SCREEN+"\033[1;1H");
   }
-  
+
   public Maze(String filename){
     ArrayList<char[]> lines = new ArrayList<char[]>();
     int startr=-1, startc=-1;
@@ -102,8 +120,8 @@ public class Maze{
     The start/end Locations may need more information later when we add
     other kinds of frontiers!
     */
-    end = new Location(endr,endc,null);
-    start = new Location(startr,startc,null);
+    end = new Location(endr,endc,null,0,AStar);
+    start = new Location(startr,startc,null,0,AStar);
   }
 
   public String toStringColor(){
@@ -171,5 +189,8 @@ public class Maze{
       ans += line+color(37,40)+"\n";
     }
     return ans;
+  }
+  public void setAstart(boolean b){
+    AStar = b;
   }
 }
