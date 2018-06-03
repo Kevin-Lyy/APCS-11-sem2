@@ -1,7 +1,7 @@
-Public class Location impletments Comparable<Location>{
-  private int x, y, dist, priority ;
-  Location prev;
-  boolean aStar;
+public class Location implements Comparable<Location>{
+  private int x, y, dist, priority;
+  private Location prev;
+  private boolean aStar;
 
   public Location(int _x,int _y, Location prevs,int dists, boolean aStarq){
     x = _x;
@@ -10,7 +10,7 @@ Public class Location impletments Comparable<Location>{
     dist = dists;
     aStar = aStarq;
   }
-  
+
   public int getX(){
     return x;
   }
@@ -23,7 +23,7 @@ Public class Location impletments Comparable<Location>{
     return prev;
   }
 
-  public String to String(){
+  public String toString(){
     return x + " " + y;
   }
 
@@ -33,6 +33,10 @@ Public class Location impletments Comparable<Location>{
 
   public int getDist(){
     return dist;
+  }
+
+  public int compareTo(Location l){
+    return getPriority() - l.getPriority();
   }
 
 }

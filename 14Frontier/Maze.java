@@ -29,22 +29,22 @@ public class Maze{
     int up = y+1;
     int down = y-1;
     if(maze[right][y] == ' ' || maze[right][y] == 'E'){
-      array[0] = new Location(right,y,L,Math.abs(right-endX)+Math.abs(y-endY),AStar);
+      neighbors[0] = new Location(right,y,L,Math.abs(right-endX)+Math.abs(y-endY),AStar);
       maze[right][y] = '?';
     }
     if(maze[left][y] == ' ' || maze[left][y] == 'E'){
-      array[1] = new Location(left,y,L,Math.abs(left-endX)+Math.abs(y-endY),AStar);
+      neighbors[1] = new Location(left,y,L,Math.abs(left-endX)+Math.abs(y-endY),AStar);
       maze[left][y] = '?';
     }
     if(maze[x][up] == ' ' || maze[x][up] == 'E'){
-      array[2] = new Location(up,y,L,Math.abs(x-endX)+Math.abs(up-endY),AStar);
+      neighbors[2] = new Location(up,y,L,Math.abs(x-endX)+Math.abs(up-endY),AStar);
       maze[x][up] = '?';
     }
     if(maze[x][down] == ' ' || maze[x][down] == 'E'){
-      array[3] = new Location(down,y,L,Math.abs(x-endX)+Math.abs(down-endY),AStar);
+      neighbors[3] = new Location(down,y,L,Math.abs(x-endX)+Math.abs(down-endY),AStar);
       maze[x][down] = '?';
     }
-
+    return neighbors;
 
   }
 
