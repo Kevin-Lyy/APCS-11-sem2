@@ -20,8 +20,11 @@ public class MazeSolver{
 		//  check if any locations are the end, if you found the end just return true!
 		//  add all the locations to the frontier
 		//when there are no more values in the frontier return false
-
 	  public boolean solve(int mode){
+			if(mode == 0) frontier = new FrontierQueue();
+			if(mode == 1) frontier = new FrontierStack();
+			if(mode == 2) frontier = new FrontierPriorityQueue();
+			//astar
 
 	    return false;
 	  }
