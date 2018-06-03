@@ -190,7 +190,7 @@ public class Maze{
     }
     return ans;
   }
-  public void setAstart(boolean b){
+  public void setAstar(boolean b){
     AStar = b;
   }
 }

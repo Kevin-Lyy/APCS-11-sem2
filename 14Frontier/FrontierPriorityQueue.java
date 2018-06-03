@@ -1,7 +1,9 @@
 public class FrontierPriorityQueue implements Frontier{
+
 	private MyHeap<Location> pQueue;
-	public FrontierPriorityQueue{
-		pQueue = new MyHeap<Location>(false;)
+
+	public FrontierPriorityQueue(){
+		pQueue = new MyHeap<Location>(false);
 	}
 
 
