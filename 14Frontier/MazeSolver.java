@@ -31,12 +31,7 @@ public class MazeSolver{
 			maze.setAstar(true);
 		}
 		frontier.add(maze.getStart());
-		while(frontier.hasNext()){
-			if(animate){
-				clearTerminal();
-				System.out.println(this);
-				wait(20);
-			}
+
 			Location now = frontier.next();
 			Location[] neighbors = maze.getNeighbors(now);
 			for(int c = 0; c < 4; c++){
@@ -61,13 +56,6 @@ public class MazeSolver{
 		return maze.toString();
 	}
 
-	private void wait(int millis){
-      	try {
-	    Thread.sleep(millis);
-      	}
-      	catch (InterruptedException e) {
-      	}
-    }
 
 		public void clearTerminal(){
 			 //erase terminal, go to top left of screen.
