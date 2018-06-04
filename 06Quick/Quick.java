@@ -29,7 +29,7 @@ public class Quick{
 
 
   public static int quickselect(int[]ary,int k){
-    quickSort(ary);
+    quicksort(ary);
     return ary[k];
   }
 
@@ -52,7 +52,14 @@ public class Quick{
     data[y] = temp;
   }
 
-
+  public static void main(String[] args) {
+  	int[] arr = {554,6465,2342,545,345,65,5};
+  	quicksort(arr);
+  	System.out.println(Arrays.toString(arr));
+          // System.out.println(Arrays.toString(arr));
+          // System.out.println(Quick.partition(arr, 0, arr.length - 1));
+          // System.out.println(Arrays.toString(arr));
+      }
 
 
 }
