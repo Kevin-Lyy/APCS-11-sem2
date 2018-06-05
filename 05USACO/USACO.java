@@ -121,6 +121,6 @@ public class USACO{
       }
       Count++;
     }
-    return fullPath[erow - 1][eCol - 1];
+    return fullPath[eRow - 1][eCol - 1];
   }
 }
